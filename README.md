@@ -4,6 +4,15 @@
 - SSAFY 11기생들이 만든 CS 스터디 Repo입니다.🤸‍♀️🤸‍♂️🤸‍♀️🤸‍ **(24.01.15 ~ )**
 - SW 전공자들이 필수적으로 알아야 하는 지식을 공부하고, 다른 사람에게 설명할 수 있는 SKILL을 기르기 위한 스터디 입니다.
 
+- ## 🙋🏻‍♂️ Contributors
+<table>
+  <tr>
+    <td align="center"><a href="https://github.com/Chaeros"><img src="https://avatars.githubusercontent.com/u/48514956?v=4" width="120px;" alt=""/><br /><sub><b>박찬호</b></sub></a><br /></td>
+    <td align="center"><a href="https://github.com/da010228"><img src="https://avatars.githubusercontent.com/u/69593799?v=4" width="120px;" alt=""/><br /><sub><b>강다은</b></sub></a><br /></td>
+    <td align="center"><a href="https://github.com/Ksohyeon"><img src="https://avatars.githubusercontent.com/u/110150957?s=96&v=4" width="120px;" alt=""/><br /><sub><b>강소현</b></sub></a><br /></td>
+  </tr>
+</table>
+
 ## 📝 스터디 방식
 - 주 1회 (금) 회의 및 발표를 진행합니다.
 - 한 과목이 끝나면 모의 면접을 진행합니다.
