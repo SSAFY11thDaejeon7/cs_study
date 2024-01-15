@@ -8,19 +8,21 @@
 - ## 🙋🏻‍♂️ Contributors
 <table>
   <tr>
-    <td align="center"><a href="https://github.com/Chaeros"><img src="https://github.com/SSAFY11thDaejeon7/cs_study/assets/91451735/73085e5e-4677-46c5-9f66-def2f67fc6b7" width="120px;" alt=""/><br /><sub><b>강세현</b></sub></a><br /></td>
+    <td align="center"><a href="https://github.com/SehyeonKang"><img src="https://avatars.githubusercontent.com/u/80624927?v=4" width="120px;" alt=""/><br /><sub><b>강세현</b></sub></a><br /></td>
     <td align="center"><a href="https://github.com/Yebin-Gwak"><img src="https://github.com/SSAFY11thDaejeon7/cs_study/assets/91451735/73085e5e-4677-46c5-9f66-def2f67fc6b7" width="120px;" alt=""/><br /><sub><b>곽예빈</b></sub></a><br /></td>
     <td align="center"><a href="https://github.com/Chaeros"><img src="https://github.com/SSAFY11thDaejeon7/cs_study/assets/91451735/6a691fe9-0a25-43f2-a650-a83b4f30aff8" width="120px;" alt=""/><br /><sub><b>박찬호</b></sub></a><br /></td>
     <td align="center"><a href="https://github.com/ensk26"><img src="https://github.com/SSAFY11thDaejeon7/cs_study/assets/91451735/e6c5d98f-808d-4b52-a3ec-d26028243d5c" width="120px;" alt=""/><br /><sub><b>서두나</b></sub></a><br /></td>
+    <td align="center"><a href="https://github.com/leeggon"><img src="https://avatars.githubusercontent.com/u/138864974?v=4" width="120px;" alt=""/><br /><sub><b>이경곤</b></sub></a><br /></td>
     <td align="center"><a href="https://github.com/sumin305"><img src="https://github.com/SSAFY11thDaejeon7/cs_study/assets/91451735/7bd45991-f6d3-4ae1-9a67-8141cada99ab" width="120px;" alt=""/><br /><sub><b>이수민</b></sub></a><br /></td>
-    <td align="center"><a href="https://github.com/Chaeros"><img src="https://github.com/SSAFY11thDaejeon7/cs_study/assets/91451735/cc907266-3789-43ea-aff2-de1b79a770bb" width="120px;" alt=""/><br /><sub><b>이승철</b></sub></a><br /></td>
+    <td align="center"><a href="https://github.com/Aeraekun"><img src="https://avatars.githubusercontent.com/u/68500724?v=4" width="120px;" alt=""/><br /><sub><b>이승철</b></sub></a><br /></td>
     <td align="center"><a href="https://github.com/JeonSungGwon"><img src="https://github.com/SSAFY11thDaejeon7/cs_study/assets/91451735/bb731727-8bb3-4dfc-b8b4-293cee4f97c8" width="120px;" alt=""/><br /><sub><b>전성권</b></sub></a><br /></td>
     <td align="center"><a href="https://github.com/mrcsbin"><img src="https://github.com/SSAFY11thDaejeon7/cs_study/assets/91451735/cc907266-3789-43ea-aff2-de1b79a770bb" width="120px;" alt=""/><br /><sub><b>조성빈</b></sub></a><br /></td>
   </tr>
 </table>
 
 ## 📝 스터디 방식
-- 주 3회 (월,수,목) 강의를 수강하고 공부한 내용을 정리하여 깃허브에 push합니다.
+- 주 3회 (월,수,목) 정해진 강의를 수강하고 공부한 내용을 정리하여 main branch에 commit합니다.
+- 
 - 한 과목이 끝나면 모의 면접을 진행합니다.
 
 - ## 🔗 참고자료 Links
@@ -39,6 +41,12 @@
 |     | [[OS] Lecture 2. OS Overview (2/3) / 운영체제 강의](https://www.youtube.com/watch?v=hzXVQIlSSos&list=PLBrGAFAIyf5rby7QylRc6JxU5lzQ9c4tN&index=3)                  |  24.01.17  |
 |     | [[OS] Lecture 2. OS Overview (3/3) / 운영체제 강의](https://www.youtube.com/watch?v=knF9lzHA3LI&list=PLBrGAFAIyf5rby7QylRc6JxU5lzQ9c4tN&index=4)                  |  24.01.17  |
 
+
+## 📌스프링 동작원리
+
+| 주차  | 제목                                                                                                                                                               | 날짜 |
+|-----|------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----|
+| 1주차 | DI                  | 24.01.15 |
 
 ## 📁 면접질문모음 
 |**과목명**|**질문보기**|기간|모의면접|
