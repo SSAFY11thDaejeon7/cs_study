@@ -7,15 +7,17 @@
 - ## 🙋🏻‍♂️ Contributors
 <table>
   <tr>
-    <td align="center"><a href="https://github.com/Chaeros"><img src="https://avatars.githubusercontent.com/u/48514956?v=4" width="120px;" alt=""/><br /><sub><b>박찬호</b></sub></a><br /></td>
-    <td align="center"><a href="https://github.com/da010228"><img src="https://avatars.githubusercontent.com/u/69593799?v=4" width="120px;" alt=""/><br /><sub><b>강다은</b></sub></a><br /></td>
-    <td align="center"><a href="https://github.com/Ksohyeon"><img src="https://avatars.githubusercontent.com/u/110150957?s=96&v=4" width="120px;" alt=""/><br /><sub><b>강소현</b></sub></a><br /></td>
+    <td align="center"><a href="https://github.com/Chaeros"><img src="https://github.com/SSAFY11thDaejeon7/cs_study/assets/91451735/6a691fe9-0a25-43f2-a650-a83b4f30aff8" width="120px;" alt=""/><br /><sub><b>박찬호</b></sub></a><br /></td>
   </tr>
 </table>
 
 ## 📝 스터디 방식
 - 주 1회 (금) 회의 및 발표를 진행합니다.
 - 한 과목이 끝나면 모의 면접을 진행합니다.
+
+- ## 🔗Links
+- 👶🏻 신입 개발자 전공 지식 & 기술 면접 백과사전 📖  [🔗Link](https://github.com/gyoogle/tech-interview-for-developer)
+- [Pull Request에 대한 설명](https://sadoruin-notes.notion.site/Pull-Request-3e8c9a7c98bc41819729e3b306ca9987)
 
 
 ## 📁 면접질문모음 
@@ -32,9 +34,9 @@
 ```sh
 ├─CS과목명
 │  ├─pch
-│  ├─kmj
-│  ├─lyj
-│  ├─phb
+│  ├─
+│  ├─
+│  ├─
 │  ├─면접질문모음 (README.md) 
 │  │      ├─ 공부 내용
 │  │      ├─ 공부목차 (README.md)
