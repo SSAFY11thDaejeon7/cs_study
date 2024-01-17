@@ -22,7 +22,6 @@
 
 ## 📝 스터디 방식
 - 주 3회 (월,수,목) 정해진 강의를 수강하고 공부한 내용을 정리하여 main branch에 commit합니다.
-- 
 - 한 과목이 끝나면 모의 면접을 진행합니다.
 
 - ## 🔗 참고자료 Links
@@ -40,6 +39,8 @@
 |     | [[OS] Lecture 2. OS Overview (1/3) / 운영체제 강의](https://www.youtube.com/watch?v=nxl_cUd55Ag&list=PLBrGAFAIyf5rby7QylRc6JxU5lzQ9c4tN&index=2)                  |  24.01.17  |
 |     | [[OS] Lecture 2. OS Overview (2/3) / 운영체제 강의](https://www.youtube.com/watch?v=hzXVQIlSSos&list=PLBrGAFAIyf5rby7QylRc6JxU5lzQ9c4tN&index=3)                  |  24.01.17  |
 |     | [[OS] Lecture 2. OS Overview (3/3) / 운영체제 강의](https://www.youtube.com/watch?v=knF9lzHA3LI&list=PLBrGAFAIyf5rby7QylRc6JxU5lzQ9c4tN&index=4)                  |  24.01.17  |
+|     | [[OS] Lecture 3. Process Management (1/2)](https://www.youtube.com/watch?v=jZuTw2tRT7w&list=PLBrGAFAIyf5rby7QylRc6JxU5lzQ9c4tN&index=5)                  |  24.01.19  |
+|     | [[OS] Lecture 3. Process Management (1/2)](https://www.youtube.com/watch?v=MJTr37lgaMA&list=PLBrGAFAIyf5rby7QylRc6JxU5lzQ9c4tN&index=6)                  |  24.01.19  |
 
 
 ## 📌스프링 동작원리
