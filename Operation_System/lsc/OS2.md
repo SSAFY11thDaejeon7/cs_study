@@ -15,12 +15,14 @@
 - System management (시스템 보호)
 
 ### 컴퓨터 시스템의 구성
+
 ![img_4](https://github.com/SSAFY11thDaejeon7/cs_study/assets/68500724/2c36c039-7ee5-4e15-8afd-3cfe32f40e9e)
 - Hardware > OS(Kernel(Resource Management), System Call Interface) > Software
   - 운영체제의 핵심은 Kernel
   - System call interface = 시스템 라이브러리
     - 사용자가 직접 kernel에 access하는 것이 아니라 system call interface를 통해 요청하게 된다.
     - kernel이 제공하는 기능 중 사용자가 사용할 수 있는 기능들을 모아놓은 것들
+      
 ![img_5](https://github.com/SSAFY11thDaejeon7/cs_study/assets/68500724/aae0d709-dd0a-4166-8a69-90d8e153e5a3)
 
 ### 운영체제의 구분
@@ -120,10 +122,12 @@
 - 유틸리티(Utility)
   - 비상주 프로그램
   - UI 등 서비스 프로그램
+    
 ![img](https://github.com/SSAFY11thDaejeon7/cs_study/assets/68500724/37f25914-7c0a-4c2b-9d6f-607cded61d7e)
 
 - 단일 구조
-  ![img_1](https://github.com/SSAFY11thDaejeon7/cs_study/assets/68500724/788c66bd-7380-4cbe-9852-6dc35d556a61)
+  
+![img_1](https://github.com/SSAFY11thDaejeon7/cs_study/assets/68500724/788c66bd-7380-4cbe-9852-6dc35d556a61)
   - 장점
     - 커널 내 모듈간 직접 통신
       - 효율적 자원 관리 및 사용
@@ -133,7 +137,8 @@
       - 동일 메모리에 모든 기능이 있어, 한 모듈의 문제가 전체 시스템에 영향
         
 - 계층 구조
-  ![img_2](https://github.com/SSAFY11thDaejeon7/cs_study/assets/68500724/c66983fe-fbc2-44dc-9e15-861373440598)
+  
+![img_2](https://github.com/SSAFY11thDaejeon7/cs_study/assets/68500724/c66983fe-fbc2-44dc-9e15-861373440598)
   - 장점
     - 모듈화
       - 계층간 검증 및 수정 용의
@@ -143,7 +148,8 @@
       - 원하는 기능 수행을 위해 여러 계층을 거쳐야 함
         
 - 마이크로 커널 구조
-  ![img_3](https://github.com/SSAFY11thDaejeon7/cs_study/assets/68500724/a3e8f179-01cb-44d9-b6aa-09a0e65bdb15)
+  
+![img_3](https://github.com/SSAFY11thDaejeon7/cs_study/assets/68500724/a3e8f179-01cb-44d9-b6aa-09a0e65bdb15)
   - 커널의 크기 최소화
     - 필수 기능만 포함
     - 기타 기능은 사용자 영역에서 수행
