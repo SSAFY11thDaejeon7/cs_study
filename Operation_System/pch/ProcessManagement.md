@@ -99,3 +99,58 @@ OS가 프로세스 관리에 필요한 정보 저장하고, 프로세스 생성�
   - Swap-out(suspended) : memory image를 swap device에 저장하는 행동
   - Swap-in(resume) : swap device에 있는 정보를 다시 메모리에 되돌리는 행동
 <br><br>
+
+<h3>6. Terminated/Zombie State</h3>
+  - 프로세스 수행이 끝난 상태
+  - 모든 자원 반납 후, 커널 내에 일부 PCB 정보만 남아 있는 상태
+    - 이후에 다시 프로세스를 사용할 수 있으므로관리를 위해 PCB 정보를 수집하기 위해 있는 과정
+<br>
+
+## 프로세스의 상태
+  - 자원 간의 상호작용에 의해 결정
+<img src="https://github.com/SSAFY11thDaejeon7/cs_study/assets/91451735/972ef768-52eb-4cf2-9371-b0fb25677046" width="800px;" alt=""/>
+<br><br>
+
+## 인터럽트
+  - 예상치 못한, 외부에서 발생한 이벤트
+<br>
+
+1. 인터럽트의 종류
+<br>
+
+- I/O interrupt
+- Clock interrupt : CPU의 클락이 발생할 때
+- Console interrupt : 콘솔창에서 발생
+- Program check interrupt : 프로그램에 문제가 있을 때
+- Machine check interrupt : 하드웨어에 문제가 있을 때
+- inter-process interrupt : 다른 시스템이 문제 호출
+- System call interrupt : 시스템 콜 호출시 발생
+<br>
+
+2. 인터럽트 처리 과정
+<img src="https://github.com/SSAFY11thDaejeon7/cs_study/assets/91451735/e1ae37db-3ad0-4e5a-9243-f941b3ef778d" width="800px;" alt=""/>
+<br><br>
+
+- interrupt가 발생하면 커널이 개입해 프로세스를 중단시킨다(프로세서 뺏음).
+- 이 떄, context saving을 사용해 프로세스 정보를 PCB에 저장한다.
+- 인터럽트가 어디서, 왜 발생했는지 원인을 파악한다. ( interrupt handling )
+- 인터럽트를 처리하기 위한 서비스 호출 ( Interrupt service )
+- 처리 서비스가 끝나면, Ready Queue 상태에서 기다리고 있던 우선순위의 작업을 프로세서에 할당한다.
+- 중단시켰었던 작업이 다시 프로세서에 할당될 때, 이전에 저장시킨 PCB 정보를 활용하여 복구 후 실행한다.
+<br>
+
+3. Context Switching ( 문맥 교환 )
+  1) Context
+     - 프로세스와 관련된 정보들의 집합
+       - CPU regiter context : CPU 안의 관련 정보
+       - Code & data, Stack, PCB : Memory 안의 관련 정보
+  2) Context saving
+     - 현재 프로세스의 Register context를 저장하는 작업
+  3) Context restoring
+     - Register context를 프로세스로 복구하는 작업
+  4) Context switching ( Context saving + Context restoring )
+     - 실행 중인 프로세스의 context를 저장하고 앞으로 실행 할 프로세스이 context를 복구하는 일
+    
+4. Context Switch Overhead
+   - OS 마다 다르지만 성능에 큰 영향을 끼침
+   - 스레드 사용 등으로 불필요한 Context switching을 줄일 수 있음
