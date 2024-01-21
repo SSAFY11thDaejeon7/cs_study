@@ -46,6 +46,7 @@ cf. PCB 정보는 OS별로 서로 다르다. PCB 참조 및 갱신 속도는 OS�
 1. HW 자원 : 프로세서, 메모리, I/O 장치 등
 2. SW 자원 : 메시지,파일,신호 등
 
+
 ## 프로세스 상태 (자원 간의 상호작용에 의해 상태 결정)
 
 ![image](https://github.com/SSAFY11thDaejeon7/cs_study/assets/138864974/a6dad8e3-2b71-49c9-8aca-27f6af29fb92)
@@ -58,6 +59,7 @@ cf. PCB 정보는 OS별로 서로 다르다. PCB 참조 및 갱신 속도는 OS�
 PCB 할당 및 프로세스 생성된 상태
 
 OS는 가용 메모리 공간을 체크하고 프로세스를 Ready State or Suspended state로 보냄.
+
 
 ## 1. created state 이후에 메모리를 할당 받은 상태(active)
 
@@ -89,6 +91,7 @@ Asleep상태에서 I/O 등 자원이 준비되어도 곧바로 Running State로 
 
 프로세스 수행이 모두 끝났을 때, 모든 자원 반납 후 커널에게 PCB 정보를 제출 (커널이 이후 프로세스 관리를 위해 정보 수집)
 
+
 ## 2. created state 이후에 메모리를 할당 받지 못한(뺏긴) 상태(suspended)
 
 **swap**
@@ -103,11 +106,13 @@ swap이 일어날 때마다 swap device에 프로세스마다 메모리 현황�
 
 ### Suspended Blocked State
 
+
 ## 프로세스 관리를 위한 메모리 구조
 
 ![image](https://github.com/SSAFY11thDaejeon7/cs_study/assets/138864974/fa07898b-4c1f-4161-bb01-ef335d8cb4bc)
 - Ready state : 스케줄러에 의해 선택되는 프로세스들의 Queue
 - Blocked/asleep state : CPU 이외에 자원 요청 상황. 자원 및 device 별로 요청을 기다리는 Queue
+
 
 ## 인터럽트 Interrupt
 
@@ -136,6 +141,7 @@ swap이 일어날 때마다 swap device에 프로세스마다 메모리 현황�
 - Interrupt service : 인터럽트 서비스 루틴 호출. 인터럽트도 하나의 프로세스이기 때문에 프로세서에게 인터럽트 프로세스 처리 요청
 
 인터럽트 처리가 끝나면, 다시 ready state에 있는 기존 프로세스들이 자신의 PCB에 있는 context 정보 가져와서 수행 시작
+
 
 ## Context 란?
 
