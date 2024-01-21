@@ -26,6 +26,7 @@
 **PCB(Process Control Block)**
 
 ![image](https://github.com/SSAFY11thDaejeon7/cs_study/assets/138864974/3aae383b-a2b8-46d6-bf3e-b6c25dae9154)
+
 OS가 프로세스 관리를 위해 필요한 정보들을 저장
 
 - PID : 프로세스 고유 식별 번호
@@ -126,6 +127,7 @@ swap이 일어날 때마다 swap device에 프로세스마다 메모리 현황�
 **처리 과정**
 
 ![image](https://github.com/SSAFY11thDaejeon7/cs_study/assets/138864974/eb339764-93b6-485b-9744-91f3485f3e33)
+
 인터럽트 발생 → 프로세스 중단 → 인터럽트 처리 (Interrupt handling + Interrupt service)
 
 - 프로세스 중단 : PCB에 context saving 작업
