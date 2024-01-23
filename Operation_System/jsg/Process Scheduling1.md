@@ -15,7 +15,7 @@
 ## 스케줄링(Scheduling)의 목적
 - 시스템의 성능(performance) 향상
 #### 대표적 시스템 성능 지표(index)
-- 응당시간(response time)  --> 대화형 시스템, real-time에 적합
+- 응답시간(response time)  --> 대화형 시스템, real-time에 적합
   - 작업요청으로부터 응답을 받을때까지의 시간
 - 작업 처리량(throughput) --> batch 시스템 적합
   - 단위 시간동동안 완료된 작업의 수
