@@ -62,7 +62,7 @@
   - Context switching 등 부하(Overhead)가 큼 (단점)
 - 커널이 각 쓰레드를 개별적으로 관리
   - 프로세스 내 스레드들이 병행 수행 가능 (장점)
-    - 하나의 쓰레드가 block 상태가 되어도, 다릍ㄴ 쓰레드는 계속 작업 수행 가능
+    - 하나의 쓰레드가 block 상태가 되어도, 다른 쓰레드는 계속 작업 수행 가능
    
 ### Multi - Threading Model (혼합형 쓰레드) n:m
 <img width="505" alt="스크린샷 2024-01-22 오후 9 55 43" src="https://github.com/SSAFY11thDaejeon7/cs_study/assets/129651243/d16277d1-0d18-4c7b-9607-411b02bb8f6a">
