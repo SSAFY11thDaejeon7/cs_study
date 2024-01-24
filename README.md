@@ -41,8 +41,11 @@
 |     | [[OS] Lecture 2. OS Overview (3/3) / 운영체제 강의](https://www.youtube.com/watch?v=knF9lzHA3LI&list=PLBrGAFAIyf5rby7QylRc6JxU5lzQ9c4tN&index=4)                  |  24.01.17  |
 |     | [[OS] Lecture 3. Process Management (1/2)](https://www.youtube.com/watch?v=jZuTw2tRT7w&list=PLBrGAFAIyf5rby7QylRc6JxU5lzQ9c4tN&index=5)                  |  24.01.19  |
 |     | [[OS] Lecture 3. Process Management (1/2)](https://www.youtube.com/watch?v=MJTr37lgaMA&list=PLBrGAFAIyf5rby7QylRc6JxU5lzQ9c4tN&index=6)                  |  24.01.19  |
-|     | [[OS] Lecture 4. Thread management](https://www.youtube.com/watch?v=YlnvCIZQDkw&list=PLBrGAFAIyf5rby7QylRc6JxU5lzQ9c4tN&index=7)                  |  24.01.22  |
+| 2주차 | [[OS] Lecture 4. Thread management](https://www.youtube.com/watch?v=YlnvCIZQDkw&list=PLBrGAFAIyf5rby7QylRc6JxU5lzQ9c4tN&index=7)                  |  24.01.22  |
 |     | [[OS] Lecture 5. Process Scheduling (1/4)](https://www.youtube.com/watch?v=_gNeoGQx-Tc&list=PLBrGAFAIyf5rby7QylRc6JxU5lzQ9c4tN&index=8)                  |  24.01.22  |
+|     | [[OS] Lecture 5. Process Scheduling (2/4)](https://www.youtube.com/watch?v=r1JVA7yOPAM&list=PLBrGAFAIyf5rby7QylRc6JxU5lzQ9c4tN&index=9)                  |  24.01.24  |
+|     | [[OS] Lecture 5. Process Scheduling (3/4)](https://www.youtube.com/watch?v=keY9Wi7scEs&list=PLBrGAFAIyf5rby7QylRc6JxU5lzQ9c4tN&index=10)                  |  24.01.24  |
+|     | [[OS] Lecture 5. Process Scheduling (4/4)](https://www.youtube.com/watch?v=actKUqea6Xc&list=PLBrGAFAIyf5rby7QylRc6JxU5lzQ9c4tN&index=11)                  |  24.01.24  |
 
 
 ## 📌스프링 동작원리
