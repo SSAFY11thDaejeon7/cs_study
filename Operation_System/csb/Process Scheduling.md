@@ -1,5 +1,4 @@
 # 다중 프로그래밍
-
 ### 다중 프로그래밍 (Multi-programming)
 
 - 여러개의 프로세스가 시스템 내 존재
@@ -12,7 +11,6 @@
         - 하나의 자원(메모리)을 분할하여 동시에 사용
 
 # 스케줄링
-
 ### 스케줄링의 목적
 
 - 시스템의 성능(performance) 향상
@@ -97,7 +95,6 @@
 # 스케줄링 정책 (Policy)
 
 ### Preemptive (선점) / Non-preemptive Scheduling (비선점)
-
 - Non-preemptive scheduling
     - 할당 받을 자원을 스스로 반납할 때까지 사용
         - 예) system call, I/O, Etc.
@@ -114,7 +111,6 @@
         - Context switch overhead가 큼
 
 ### Priority
-
 - 프로세스의 중요도
 - Static priority (정적 우선순위)
     - 프로세스 생성시 결정된 priority가 유지됨
@@ -124,3 +120,117 @@
     - 프로세스의 상태 변화에 따라 priority 변경
     - 구현이 복잡, priority 재계산 overhead가 큼
     - 시스템 환경 변화에 유연한 대응 가능
+
+# 기본 스케줄링 알고리즘
+
+### FCFS (First-Come-First-Service)
+- Non-preemptive scheduling
+- 스케줄링 기준
+    - 도착 시간 (ready queue 기준)
+    - 먼저 도착한 프로세스를 먼저 처리
+- 자원을 효율적으로 사용 가능
+    - High resource utilization ← 불필요한 스케줄링 오버헤드가 발생하지 않기 때문
+- Batch System에 적합
+- Interactive System에 부적합
+- 단점
+    - Convoy effect: 하나의 수행시간이 긴 프로세스에 의해 다른 프로세스들이 긴 대기시간을 갖게되는 현상 (대기시간 >> 실행시간)
+    - 긴 평균 응답시간
+<img width="597" alt="image" src="https://github.com/SSAFY11thDaejeon7/cs_study/assets/81237987/e9c46974-89eb-4daf-b905-80b7e4bc2d2b">
+
+<img width="896" alt="image" src="https://github.com/SSAFY11thDaejeon7/cs_study/assets/81237987/aa2180ce-27b0-4860-8caf-bb319645c1d5">
+- Normalized TT (NTT) = TT / BT (1에 가까울수록 이상적, 클수록 평균적으로 더 대기가 김)
+
+### RR (Round-Robin)
+- Preemptive scheduling
+- 스케줄링 기준
+    - 도착 시간(ready queue 기준)
+    - 먼저 도착한 프로세스를 먼저 처리
+- 자원 사용 제한 시간(time quantum) 이 있음
+    - System parameter
+    - 프로세스는 할단된 시간이 지나면 자원 반납(Timer-runout)
+    - 특정 프로세스의 자원 독점(monopoly) 방지
+    - Context switch overhead가 큼
+- 대화형, 시분할 시스템에 적합
+- Time quantum(제한 시간)이 시스템 성능을 결정하는 핵심 요소
+    - 제한 시간이 무한에 가까울수록 → FCFS
+    - 제한 시간이 작아질수록 → processor sharing
+        - 사용자는 모든 프로세스가 각각의 프로세서 위에서 실행되는 것처럼 느끼지만 매우 높은 Context switch overhead 발생
+<img width="657" alt="image" src="https://github.com/SSAFY11thDaejeon7/cs_study/assets/81237987/8bcf79ae-22fc-4099-b50f-d6a912025db1">
+
+<img width="1012" alt="image" src="https://github.com/SSAFY11thDaejeon7/cs_study/assets/81237987/30b00eec-161f-43d2-adf2-4a54bdf80c88">
+- FCFS에 비해 NTT가 균등한 것을 확인할 수 있음
+
+### SPN (Shortest-Process-Next)
+- SJF(Shortest Job First) Scheduling
+- Non-preemptive scheduling
+- 스케줄링 기준
+    - 실행시간(Burst time 기준)
+    - Burst time이 가장 작은 프로세스를 먼저 처리
+- 장점
+    - 평균 대기시간 최소화
+    - 시스템 내 프로세스 수 최소화
+        - 스케줄링 부하 감소, 메모리 절약 → 시스템 효율 향상
+    - 많은 프로세스들에게 빠른 응답 시간 제공
+- 단점
+    - Starvation(기아현상, 무한대기) 현상 발생
+        - BT가 긴 프로세스는 자원을 할당 받지 못할 수 있음 → Aging 등으로 해결
+    - 정확한 실행시간을 알 수 없음 → 실행시간 예측 기법 필요
+<img width="1031" alt="image" src="https://github.com/SSAFY11thDaejeon7/cs_study/assets/81237987/09c732ff-5f79-4d7d-9015-2f2279b9e3e3">
+
+### SRTN(Shortest Remaining Time Next)
+- SPN의 변형
+- Preemptive scheduling
+    - 잔여 실행 시간이 더 적은 프로세스가 ready 상태가 되면 선점됨
+- 장점
+    - SPN의 장점 극대화
+- 단점
+    - 프로세스 생성시, 총 실행 시간 예측이 필요함
+    - 잔여 실행을 계속 추적해야 함 = overhead
+    - Context switching overhead
+- 구현 및 사용이 비현실적
+<img width="836" alt="image" src="https://github.com/SSAFY11thDaejeon7/cs_study/assets/81237987/14938ddd-fa5c-4bf9-b678-a9c256279927">
+
+### HRRN (High-Response-Ratio-Next)
+- SPN의 변형
+    - SPN + Aging concepts, Non-preempitve scheduling
+- Aging concepts
+    - 프로세스의 대기 시간을 고려하여 기회를 제공
+- 스케줄링 기준
+    - Response ratio가 높은 프로세스 우선
+- Response ratio(응답률) = (WT + BT) / BT
+    - SPN의 장점 + Starvation 방지
+    - 실행 시간 예측 기법 필요(overhead)
+<img width="1076" alt="image" src="https://github.com/SSAFY11thDaejeon7/cs_study/assets/81237987/f0b13694-ba32-43bf-a334-a63b4aa84548">
+
+### MLQ (Multi-level Queue)
+- 작업이나 우선순위별로 별도의 ready queue를 가짐
+    - 최초 배정된 queue를 벗어나지 못함
+    - 각각의 queue는 자신만의 스케줄링 기법 사용
+- Queue 사이에는 우선순위 기반의 스케줄링 사용
+- 장점
+    - 우선순위가 높은 작업에 대해 빠른 응답 가능
+- 단점
+    - 여러 개의 Queue 관리 등 스케줄링 overhead
+    - 우선순위가 낮은 queue는 starvation 현상 발생 가능
+<img width="750" alt="image" src="https://github.com/SSAFY11thDaejeon7/cs_study/assets/81237987/3c8dad0c-bd9f-472b-8c71-02d5078340ed">
+
+
+### MFQ (Multi-level Feedback Queue)
+- 프로세스의 Queue간 이동이 허용된 MLQ
+- Feedback을 통해 우선 순위 조정
+    - 현재까지의 프로세서 사용 정보(패턴) 활용
+- 특성
+    - Dynamic priority
+    - Preemptive scheduling
+    - Favor short burst-time processes
+    - Favor I/O bounded processes
+    - Improve adaptability
+- 프로세스에 대한 사전 정보 없이 SPN, SRTN, HRRN 기법의 효과를 볼 수 있음
+- 단점
+    - 설계 및 구현이 복잡, 스케줄링 overhead가 큼
+    - Starvation 문제 등
+- 변형
+    - 각 준비 큐마다 시간 할당량을 다르게 배정
+    - 입출력 위주 프로세스들을 상위 단계 큐로 이동, 우선 순위 높음
+    - 대기 시간이 지정된 시간을 초과한 프로세스들을 상위 큐로 이동
+<img width="730" alt="image" src="https://github.com/SSAFY11thDaejeon7/cs_study/assets/81237987/643eec6e-78d6-4c32-8bbb-d5fe7784ccac">
