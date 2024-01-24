@@ -209,7 +209,6 @@ Burst time이 적은 프로세스 순으로 스케줄링
     - SPN의 장점 + Starvation 방지
     - 실행 시간 예측 기법 필요
     
-    ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/f4b96944-0c97-44f0-b408-a37e194d2be2/ccc6fb7d-3871-4724-8016-1c0b843b3092/Untitled.png)
     
 
 ## 6. MLQ(Multi-level Queue)
