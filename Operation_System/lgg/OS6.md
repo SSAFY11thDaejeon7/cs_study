@@ -100,7 +100,7 @@ version1,2,3 모두 mutual exclusion requirements를 만족시키지 못함.
 
 ME를 보장하는 최초의 SW 알고리즘
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/14b1c30e-5d3b-48f6-8b6e-6fee7cccb9d0/bf1fc96d-1963-43a1-b7ac-7579f2a16a8d/Untitled.png)
+![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/14b1c30e-5d3b-48f6-8b6e-6fee7cccb9d0/42b1cd93-0f06-4a58-a53c-c954986cf12b/Untitled.png)
 
 **개념**
 
