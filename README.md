@@ -46,7 +46,8 @@
 |     | [[OS] Lecture 5. Process Scheduling (2/4)](https://www.youtube.com/watch?v=r1JVA7yOPAM&list=PLBrGAFAIyf5rby7QylRc6JxU5lzQ9c4tN&index=9)                  |  24.01.24  |
 |     | [[OS] Lecture 5. Process Scheduling (3/4)](https://www.youtube.com/watch?v=keY9Wi7scEs&list=PLBrGAFAIyf5rby7QylRc6JxU5lzQ9c4tN&index=10)                  |  24.01.24  |
 |     | [[OS] Lecture 5. Process Scheduling (4/4)](https://www.youtube.com/watch?v=actKUqea6Xc&list=PLBrGAFAIyf5rby7QylRc6JxU5lzQ9c4tN&index=11)                  |  24.01.24  |
-
+|     | [[OS] Lecture 6. Process Synchronization and Mutual Exclusion (1/7)](https://www.youtube.com/watch?v=wdaf2gy83uU&list=PLBrGAFAIyf5rby7QylRc6JxU5lzQ9c4tN&index=12)                  |  24.01.26  |
+|     | [[OS] Lecture 6. Process Synchronization and Mutual Exclusion (2/7)](https://www.youtube.com/watch?v=lY43KR3IItw&list=PLBrGAFAIyf5rby7QylRc6JxU5lzQ9c4tN&index=13)                  |  24.01.26  |
 
 ## 📌스프링 동작원리
 
