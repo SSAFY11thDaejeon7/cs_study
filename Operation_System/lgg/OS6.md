@@ -16,7 +16,7 @@ Critical Section 임계 영역 : 프로세스간 공유 데이터에 접근하�
 
 Mutual Exclusion(mutex) 상호 배제 : 둘 이상의 프로세스가 동시에 critical section에 진입하는 것을 막는 것
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/14b1c30e-5d3b-48f6-8b6e-6fee7cccb9d0/b56f2bce-b3fd-4c11-9020-a5b73ce57a56/Untitled.png)
+![image](https://github.com/SSAFY11thDaejeon7/cs_study/assets/138864974/60e00397-73e7-4af2-a1f5-c3147ea36089)
 
 **원자성**
 
@@ -46,7 +46,7 @@ Mutual Exclusion의 3가지 Requirement
 
 - Mutual Exclusion version 1
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/14b1c30e-5d3b-48f6-8b6e-6fee7cccb9d0/557c36d3-cf6f-4bf2-ae79-991b77d3f657/Untitled.png)
+![image](https://github.com/SSAFY11thDaejeon7/cs_study/assets/138864974/01e2ad17-d858-4884-aebb-b202ce40d20f)
 
 **방법**
 
@@ -60,7 +60,7 @@ p0이 cs 진입하지 않으면 p1은 무한대기에 빠지게 됨.
 
 - Mutual Exclusion version 2
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/14b1c30e-5d3b-48f6-8b6e-6fee7cccb9d0/436dba0b-5bc8-48d9-9666-0c8998bee497/Untitled.png)
+![image](https://github.com/SSAFY11thDaejeon7/cs_study/assets/138864974/9ccc4a87-e693-4413-9a70-102f9f088799)
 
 **방법**
 
@@ -78,7 +78,7 @@ p1이 cs영역 진입. 아직 p0의 flag가 세워져있지 않으므로 cs영�
 
 - Mutual Exclusion version 3
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/14b1c30e-5d3b-48f6-8b6e-6fee7cccb9d0/32a97691-d95a-4125-85ce-b949451e65d7/Untitled.png)
+![image](https://github.com/SSAFY11thDaejeon7/cs_study/assets/138864974/81b23a2f-edbf-44b2-ac62-a2a978711d31)
 
 **방법**
 
@@ -100,7 +100,7 @@ version1,2,3 모두 mutual exclusion requirements를 만족시키지 못함.
 
 ME를 보장하는 최초의 SW 알고리즘
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/14b1c30e-5d3b-48f6-8b6e-6fee7cccb9d0/42b1cd93-0f06-4a58-a53c-c954986cf12b/Untitled.png)
+![image](https://github.com/SSAFY11thDaejeon7/cs_study/assets/138864974/c54388b2-a901-4ca3-9e2a-fa46a61b088c)
 
 **개념**
 
@@ -114,7 +114,7 @@ flag 변수 3개 사용
 2. want-in : 프로세스가 cs영역 진입 시도 1단계일때
 3. in-CS : 프로세스가 cs영역 진입 시도 2단계일때 + cs영역 내에 있을 때
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/14b1c30e-5d3b-48f6-8b6e-6fee7cccb9d0/42b1cd93-0f06-4a58-a53c-c954986cf12b/Untitled.png)
+![image](https://github.com/SSAFY11thDaejeon7/cs_study/assets/138864974/3a90e87e-1177-4c21-8c96-4ce5ba1b7d43)
 
 **1단계**
 
