@@ -54,10 +54,10 @@
 ![image](https://github.com/SSAFY11thDaejeon7/cs_study/assets/68500724/ce1a1c86-25cf-49ec-b366-12ba630ea2cb)
 - Progress 조건 위배
   - P0이 critical Section에 진입하지 않는 경우
-  - 한 Progree가 두 번 연속 CS에 진입 불가
+  - 한 Progress가 두 번 연속 CS에 진입 불가
 
 ![image](https://github.com/SSAFY11thDaejeon7/cs_study/assets/68500724/44138d02-985c-4dbc-a565-c2e7c8991ef8)
-- Progreee, Bounded wating 조건 위배
+- Progress, Bounded wating 조건 위배
 ## Mutual Exclusion Solutions
 - SW solutions
   - 2-Process Mutual Exclusion
