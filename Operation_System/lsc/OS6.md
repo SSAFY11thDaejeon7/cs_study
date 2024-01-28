@@ -1,28 +1,28 @@
 # [OS] Lecture 6. Process Synchronization and Mutual Exclusion
 
 ## Process Synchronization (동기화)
-- 다중 프로그래밍 시스템
+- **다중 프로그래밍 시스템**
   - 여러 개의 프로세스들이 존재
   - 프로세스들은 서로 독립적으로 동작
   - 공유 자원 또는 데이터가 있을 때, 문제 발생 가능
 
-- 동기화(Synchronization)
+- **동기화(Synchronization)**
   - 프로세스들이 서로 동작을 맞추는 것
   - 프로세스들이 서로 정보를 공유하는 것
 
 ## Asynchronous and Concurrent P's
-- 비동기적(Asynchronous)
+- **비동기적(Asynchronous)**
   - 프로세스들이 서로에 대해 모름
-- 병행적(Concurrent)
+- **병행적(Concurrent)**
   - 여러 개의 프로세스 들이 동시에 시스템에 존재
-- 병행 수행중인 비동기적 프로세스들이 공유 자원에 동시 접근할 때 문제가 발생할 수 있음
+- **병행 수행중인 비동기적 프로세스들이 공유 자원에 동시 접근할 때 문제가 발생할 수 있음**
 
 ## Terminologies
-- 공유 데이터(Shared or Critical data)
+- **공유 데이터(Shared or Critical data)**
   - 여러 프로세스들이 공유하는 데이터
-- 임계 영역(Critical section)
+- **임계 영역(Critical section)**
   - 공유 데이터를 접근하는 코드 영역(code segment)
-- 상호배제(Mutual exclusion)
+- **상호배제(Mutual exclusion)**
   - 둘 이상의 프로세스가 동시에 critical section에 진입하는 것을 막는 것
 
 ![image](https://github.com/SSAFY11thDaejeon7/cs_study/assets/68500724/6e00364d-dc36-4bd5-8d20-1cc8289e7469)
@@ -32,7 +32,7 @@
 ## Mutual Exclusion Methods
 ![image](https://github.com/SSAFY11thDaejeon7/cs_study/assets/68500724/b86cb235-fcd6-4555-8c7a-8ecdef347db8)
 
-- Mutual exclusion primitives
+- **Mutual exclusion primitives**
   - enterCS() primitive
     - Critical section 진입 전 검사
     - 다른 프로세스가 critical section 안에 있는지 검사
@@ -43,23 +43,23 @@
 
 
 ## Requirements for ME primitives
-- Mutual exclusion(상호배제)
+- **Mutual exclusion(상호배제)**
   - Critical section(CS)에 프로세스가 있으면, 다른 프로세스의 진입을 금지
-- Progress(진행)
+- **Progress(진행)**
   - CS 안에 있는 프로세스 외에는, 다른 프로세스가 CS에 진입하는 것을 방해하면 안됨
-- Bounded waiting(한정대기)
+- **Bounded waiting(한정대기)**
   - 프로세스의 CS 진입은 유한시간 내에 허용되어야 함
     
 ## Two Process Mutual Exclusion
 ![image](https://github.com/SSAFY11thDaejeon7/cs_study/assets/68500724/ce1a1c86-25cf-49ec-b366-12ba630ea2cb)
-- Progress 조건 위배
+- **Progress 조건 위배**
   - P0이 critical Section에 진입하지 않는 경우
   - 한 Progress가 두 번 연속 CS에 진입 불가
 
 ![image](https://github.com/SSAFY11thDaejeon7/cs_study/assets/68500724/44138d02-985c-4dbc-a565-c2e7c8991ef8)
-- Progress, Bounded wating 조건 위배
+- **Progress, Bounded wating 조건 위배**
 ## Mutual Exclusion Solutions
-- SW solutions
+- **SW solutions**
   - 2-Process Mutual Exclusion
     - Dekker's algorithm
       ![image](https://github.com/SSAFY11thDaejeon7/cs_study/assets/68500724/b276f17a-98fa-40fd-84fc-4a31b5a3eae0)
@@ -95,11 +95,11 @@
         - overhead 발생
     - Busy waiting
       - Inefficient
-- HW solution
+- **HW solution**
   - TestAndSet(TAS) instruction
-- OS supported SW solution
+- **OS supported SW solution**
   - Spinlock
   - Semaphore
   - Eventcount/sequencer
-- Language-Level solution
+- **Language-Level solution**
   - Monitor
