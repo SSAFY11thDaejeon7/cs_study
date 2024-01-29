@@ -143,3 +143,79 @@
     - 공유 데이터 수정 중은 interrupt를 억제 함으로서 해결 가능
         - overhead 발생
 - Busy waiting
+
+## HW Solution
+
+### TestAndSet(TAS) instruction
+
+- Test와 Set을 한번에 수행하는  기계어
+- Machine instruction(전체 작업을 한번에 수행)
+    - 실행 중 interrupt를 받지 않음(preemption 되지 않음)
+- 3개 이상의 프로세스의 경우, Bounded waiting 조건 위배
+- 장점: 구현이 간단
+- 단점: Busy waiting
+
+## OS supported SW solution
+
+### Spinlock
+
+- 정수 변수
+- 초기화, P(), V() 연산으로만 접근 가능
+    - indivisible(ot atomic) 연산
+        - 실행되는 동안 선점 되지 않음
+        - 전체가 한 instruction cycle에 수행 됨
+
+### Spinlock 예제
+
+![image](https://github.com/SSAFY11thDaejeon7/cs_study/assets/90568693/1d0439d5-3cab-4753-894f-bc0bbb20ff6f)
+
+
+- 임계 영역에 자원 존재(active: 1) → P(locking) 수행 후 임계 영역 내에서 작업(active: 0) → 작업 종료 후 V(unlocking) 수행(active: 1)
+- 위 과정 중 다른 프로세스는 active가 1이 될 때까지 대기, 자원이 반납 되어 active: 1이 될 경우 작업 진행
+- 멀티 프로세서 시스템에서만 사용 가능
+- Busy waiting
+
+### Semaphore
+
+- Dijkstra가 제안
+- Busy waiting 문제 해결(No busy waiting)
+    - 기다려야 하는 프로세스는 block(asleep)상태가 됨
+- 음이 아닌 정수형 변수(S)
+    - 초기화 연산, P(), V()로만 접근 가능
+- 임의의 S 변수 하나에 ready queue가 할당 됨
+- 단점: Semaphore queue에 대한 wake-up 순서는 비 결정적
+    - 기아 현상 야기
+
+- Binary semaphore
+    - S가 0과 1 두 종류의 값만 갖는 경우
+    - 상호 배제나 프로세스 동기화의 목적으로 사용
+- Counting semaphore
+    - S가 0 이상의 정수 값을 가질 수 있는 경우
+    - 생산자-소비자 문제 등을 해결하기 위해 사용
+
+### Spinlock과의 차이
+
+- P(S)
+    - Spinlock: 자원(S)이 없는 경우, 자원이 반납될 때 까지 반복 수행
+    - Semaphore: 자원(S)이 없는 경우, 해당 자원의 ready queue에서 대기
+- V(S)
+    - Spinlock: 자원 사용 후 반납, 이후 반복 대기 중인 프로세스가 작업 수행
+    - Semaphore: 자원 사용 후, ready queue에 프로세스가 있다면 해당 프로세스를 wakeup 후 자원 반납
+
+### Semaphore로 해결 가능한 동기화 문제들
+
+- 상호 배제 문제
+- 프로세스 동기화 문제
+- 생산자-소비자 문제
+- Reader-writer 문제
+- 식사하는 철학자들 문제
+
+### Reader-Writer 문제
+
+- Reader는 읽기 연산만 수행
+- Writer는 갱신 연산을 수행
+- 데이터 무결성 보장 필요
+    - Reader들은 동시에 데이터 접근 가능
+    - Writer들(또는 reader와 write)이 동시 데이터 접근 시, 상호 배제(동기화) 필요
+- 해결법
+    - reader / writer에 대한 우선권 부여
