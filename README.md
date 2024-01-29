@@ -48,6 +48,9 @@
 |     | [[OS] Lecture 5. Process Scheduling (4/4)](https://www.youtube.com/watch?v=actKUqea6Xc&list=PLBrGAFAIyf5rby7QylRc6JxU5lzQ9c4tN&index=11)                  |  24.01.24  |
 |     | [[OS] Lecture 6. Process Synchronization and Mutual Exclusion (1/7)](https://www.youtube.com/watch?v=wdaf2gy83uU&list=PLBrGAFAIyf5rby7QylRc6JxU5lzQ9c4tN&index=12)                  |  24.01.26  |
 |     | [[OS] Lecture 6. Process Synchronization and Mutual Exclusion (2/7)](https://www.youtube.com/watch?v=lY43KR3IItw&list=PLBrGAFAIyf5rby7QylRc6JxU5lzQ9c4tN&index=13)                  |  24.01.26  |
+| 3주차 | [[OS] Lecture 6. Process Synchronization and Mutual Exclusion (3/7)](https://www.youtube.com/watch?v=Zps0ckSvKys&list=PLBrGAFAIyf5rby7QylRc6JxU5lzQ9c4tN&index=14)                  |  24.01.29  |
+|     | [[OS] Lecture 6. Process Synchronization and Mutual Exclusion (4/7)](https://www.youtube.com/watch?v=33OqgesF-mM&list=PLBrGAFAIyf5rby7QylRc6JxU5lzQ9c4tN&index=15)                  |  24.01.29  |
+|     | [[OS] Lecture 6. Process Synchronization and Mutual Exclusion (5/7)](https://www.youtube.com/watch?v=CitsUz-Dx7A&list=PLBrGAFAIyf5rby7QylRc6JxU5lzQ9c4tN&index=16)                  |  24.01.29  |
 
 ## 📌스프링 동작원리
 
