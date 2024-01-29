@@ -133,3 +133,162 @@ want-in flag세우고, 현재 turn인 프로세스가 idle 선언하면 turn을 
 busy waiting : 계속 쉬지않고 프로세스들의 flag를 확인해야하므로 → overhead
 
 그래서 HW solution 탄생
+
+
+
+
+## <ME HW solution>
+
+### TAS instruction
+
+**개념**
+
+Test와 Set을 한 번에 수행하는 기계어(Machine instruction)
+
+한번에 수행한다 : Atomicity(원자성)를 가진다. 실행 도중에 interrupt를 받아서 preemption을 당하지 않는다. 도중에 context switching이 일어나지 않음.
+
+이전 race conditon이 발생했던 1. 값을 읽어오고 2. 값을 변경하고 3. 값을 쓰는 3개의 instruction을 TAS instruction 으로 기계어 한 번에 처리한다. ⇒ HW solution
+
+하지만 기존처럼 TAS 명령어와 lock만으로 구현하면, 여전히 lock이 풀렸을 때 어떤 프로세스가 우선순위를 가지고 CS영역에 진입할지? 에 대한 문제점이 생긴다. 그래서 프로세스마다의 waiting[] 배열도 함께 구현
+
+![image](https://github.com/SSAFY11thDaejeon7/cs_study/assets/138864974/40e7f880-f6b2-485d-a1b7-3e95e3aeebb3)
+
+내 프로세스의 작업이 종료되면, j= (j+1)%n 즉 오른쪽으로 쭉 살피면서 waiting 중인 프로세스가 있다면 걔의 waiting을 풀어줌 (걔가 우선권을 가지고 cs영역 들어올 수 있게) 그리고 나서 내 lock을 풀면 우선순위 문제점을 일정한 방식으로 해결할 수 있다.
+
+TAS 명령어
+
+**장점**
+
+구현이 쉽다
+
+**단점**
+
+여전히 busy waiting이 존재한다. 임계영역 진입하기 전에 계속해서 while문으로 lock이 풀렸는지, waiting상태가 어떤지 파악하고 있어야한다. 그래서 OS가 지원하는 SW solution을 함께 사용하게 됨. (Spinlock,Semaphore,Eventcount/sequencer
+
+![image](https://github.com/SSAFY11thDaejeon7/cs_study/assets/138864974/935c2778-2def-4d6e-98a4-1438eb6c57ca)
+
+### Spinlock
+
+**개념**
+
+특별한 정수형 변수. 직접 값을 쓰지 못하고 P(), V() 연산으로만 spinlock 변수에 접근이 가능함.
+
+P(), V() 연산은 atomic 연산임을 OS가 보장해준다. 실행도중에 preemption이 일어나지 않는다.
+
+P() 연산 : 물건(spinlock 변수)을 사용한다. 물건이 생길때까지 while문 반복 (busy waiting)
+
+V() 연산 : 물건을 반납한다. 사용하고 spinlock(active) 변수 ++;
+
+![image](https://github.com/SSAFY11thDaejeon7/cs_study/assets/138864974/b1932617-ffec-4ab1-82de-7ab010293f97)
+
+![image](https://github.com/SSAFY11thDaejeon7/cs_study/assets/138864974/32d3d8d5-740b-42e0-9e18-411ecccb4086)
+
+**장점**
+
+CS영역 진입할 때, 나올 때 연산을 OS가 spinlock 변수로 하나의 연산으로 보장해줌으로써 mutual exclusion 문제를 해결했음.
+
+**단점**
+
+CPU가 여러 개인 상황에서만 spinlock 변수를 사용가능하다.단일 CPU 상황에서 CS영역 도중에 context switching 일어나면, active spinlock 변수가 0인 상태로 Pi,Pj 둘다 일을 못하게 됨.
+
+Busy waiting 여전히 미해결 .P() 연산 while문
+
+### Semaphore
+
+**개념**
+
+음이 아닌 정수. spinlock 변수와 유사함. P(),V()연산 둘 다 가지고 있음.
+
+** spinlock 과의 차이점 : semaphore 변수 1개당 **ready queue**가 1개 할당된다.
+
+**종류**
+
+- binary semaphore : 0,1값만 가진다.
+- counting semaphore : 0 이상의 모든 정수를 가질 수 있다.
+
+![image](https://github.com/SSAFY11thDaejeon7/cs_study/assets/138864974/fadfff02-c78d-4dcb-9b21-6c8fe70d38d2)
+
+**spinlock 변수와의 차이점**
+
+spinlock은 busy waiting하면서 spinlock변수가 생겼을 때 P()연산을 진행했지만,
+
+semaphore는 프로세스가 cs영역 들어갈 수 없는 상황이라면 **ready queue**에 가서 그냥 대기하면 된다. → busy waiting 해결
+
+v() 연산은 ready queue에 프로세스가 존재하는지 확인하고 깨워주는 방식
+
+**semaphore로 해결 가능한 동기화 문제들**
+
+- mutual exclusion 상호 배제
+- process synchronization 프로세스 동기화
+- producer-consumer 생산자-소비자
+- reader-writer
+- Dining Philosophers
+
+1. mutual exclusion
+    
+    spinlock과 같은 방법으로 mutual exclusion 해결
+    
+2. process synchronization
+    
+    병렬, 비동기적으로 수행되는 프로세스들의 실행 순서를 해결할 수 있다.
+    
+3. producer-consumer
+    
+    생산자가 생산하는 도중에 소비자가 가져가면 안됨.
+    
+    생산자가 생산하는 도중에 다른 생산자가 생산하면 안됨.
+    
+    **single buffer producer-consumer 문제**
+
+     ![image](https://github.com/SSAFY11thDaejeon7/cs_study/assets/138864974/193a0199-d2b9-4288-9a68-d3ee3a8adad1)
+    
+
+- 생산자 : P(consumed)로 소비자에 의해 소비되었는지 확인. buffer에 생산물 입력. V(produced)로 생산됨을 알려줌
+- 소비자 : P(produced)로 생성되었는지 확인. buffer값 사용. V(consumed)로 소비되었음을 알려줌
+
+N-**buffers producer-consumer 문제**
+
+원형 buffer와 pointer로 구현 → 몇 개 생성되고, 몇 개 소비되었는지 tracking
+
+![image](https://github.com/SSAFY11thDaejeon7/cs_study/assets/138864974/217aae1f-f154-4855-a0c8-bb954a5ac8fd)
+
+- 생산자 : P(nrempty)로 buffer 비워진거 있니? 확인하고 생산완료 후에 V(nrfull) nrfull 변수 1증가.
+- 소비자 : P(nrfull)로 생산된거 있니? 확인하고 소비완료후에 V(nrempty) empty 변수 1 증가.
+
+**Reader-Writer 문제**
+
+reader들은 동시에 접근이 가능. writer는 1개씩만 접근가능(mutual exclusion 필요)
+
+reader / writer 에 대한 우선권을 부여
+
+- reader preference problem : 여러 reader와 writer가 있을 때 reader들이 먼저 읽게 해주는것
+    
+    ![image](https://github.com/SSAFY11thDaejeon7/cs_study/assets/138864974/b6c7bf1a-d53e-4920-a8b4-1b761726309a)
+    
+
+1단계 (읽기 전 작업)
+
+if (nreaders = 0) P(wmutex) : 나 읽을거야 writer 너 그만 써.
+
+else nreaders += 1 : 이미 reader가 우선권 가지고 읽고 있네? 나도 낄게
+
+2단계 (읽고나서 작업)
+
+nreaders -= 1;
+
+if (nreaders = 0) : V(wmutex) : 내가 마지막 reader네? writer야 이제 너 써.
+
+else : 아직 읽고 있는 reader님이 있네. writer 풀어주면 안되겠다
+
+- writer preference problem : 여러 reader와 writer가 있을 때 writer들이 먼저 값을 쓰게 해주는것
+    
+    reader preference problem 반대로 구현
+    
+
+**Semaphore 장점 결론**
+
+busy waiting을 없앴다! CS영역 못 들어가는 프로세스들은 ready queue에서 대기
+
+**하지만** **단점**
+
+wake up 순서를 어떻게 해야할지? starvation 현상 여전히 발생할 수 있다.
