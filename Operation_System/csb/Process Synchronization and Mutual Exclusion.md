@@ -109,3 +109,113 @@
     - 공유 데이터 수정 중은 interrupt를 억제함으로서 해결 가능
     - Overhead 발생
 - Busy waiting → Inefficient
+
+# HW Solution
+### TestAndSet (TAS) instruction
+
+- Test와 Set을 한번에 수행하는 기계어
+- Machine instruction
+    - 실행 중, interrupt를 받지 않음 (preemption 되지 않음)
+- Busy wating → inefficient
+
+<img width="643" alt="image" src="https://github.com/SSAFY11thDaejeon7/cs_study/assets/81237987/799e563a-8994-4da4-9d55-e8f2d6913d27">
+
+### ME with TAS instruction
+<img width="719" alt="image" src="https://github.com/SSAFY11thDaejeon7/cs_study/assets/81237987/5f41ba66-c383-4c5b-8f4e-8ea505c0bc64">
+
+- 3개 이상의 프로세스의 경우, Bounded wating 조건 위배
+    - 대기 중인 프로세스의 순서대로 임계영역에 접근하는 것이 아니기 때문에 무한히 대기하게 될 수 있음
+
+### N-Process Mutual Exclusion
+ <img width="1057" alt="image" src="https://github.com/SSAFY11thDaejeon7/cs_study/assets/81237987/78aae6f8-c81b-4f7f-8fb3-aaa444f7c454">
+
+### HW Solution
+- 장점: 구현이 간단
+- 단점: Busy waiting
+- Busy waiting 문제를 해소한 상호배제 기법: Semaphore
+
+# OS Supported SW Solution
+### Spinlock
+- 정수형 변수
+- 초기화, P(), V() 연산으로만 접근이 가능 (P: 자물쇠를 거는 것, V: 자물쇠를 푸는 것)
+    - 위 연산들은 indivisible(or atomic) 연산
+        - OS Support(보장)
+        - 전체가 한 instruction cycle에 수행
+- 단점: 멀티 프로세서 시스템에서만 사용이 가능, Busy waiting 문제 발생
+
+<img width="688" alt="image" src="https://github.com/SSAFY11thDaejeon7/cs_study/assets/81237987/a941f940-e2ee-4328-8e8f-30a801541713">
+
+### Semaphore의 특징
+- 1965년 Dijkstra 가 제안
+- Busy waiting 문제 해결
+- 음이 아닌 정수형 변수(S)
+- 초기화 연산, P(), V()로만 접근 가능
+- 임의의 S 변수 하나에 ready queue 하나가 할당 됨
+
+### Binary Semaphore
+- S가 0과 1 두 종류의 값만 갖는 경우
+- 상호배제나 프로세스 동기화의 목적으로 사용
+
+### Counting Semaphore
+- S가 0 이상의 정수값을 가질 수 있는 경우
+- Producer-Consumer 문제 등을 해결하기 위해 사용
+    - 생산자 - 소비자 문제
+
+### Semaphore
+- 초기화 연산
+    - S 변수에 초기값을 부여하는 연산
+- P()연산, V()연산
+- 모두 indivisible 연산
+    - OS support
+    - 전체가 한 instruction cycle 에 수행 됨
+
+<img width="1080" alt="image" src="https://github.com/SSAFY11thDaejeon7/cs_study/assets/81237987/c0d1a213-d43f-464a-b5d8-efd79a846200">
+
+### Semaphore로 해결 가능한 동기화 문제들
+- 상호배제 문제(Mutual Exclusion)
+- 프로세스 동기화 문제(Process Synchronization Problem)
+- 생산자-소비자 문제(Producer-Consumer Problem)
+- Reader-Writer 문제
+- Dining Philosopher Problem
+- 기타
+
+### Sempahore - Mutual Exclusion
+<img width="689" alt="image" src="https://github.com/SSAFY11thDaejeon7/cs_study/assets/81237987/920d2000-4620-44c9-95bd-6e9f0f4e442c">
+
+### Semapohre - Process Synchronization
+- Process들의 실행 순서 맞추기
+    - 프로세스들은 병행적이며, 비동기적으로 수행
+
+<img width="632" alt="image" src="https://github.com/SSAFY11thDaejeon7/cs_study/assets/81237987/5a25accc-3ced-4ba4-885d-d004c32b43d0">
+
+<img width="664" alt="image" src="https://github.com/SSAFY11thDaejeon7/cs_study/assets/81237987/603c71a6-9d8d-4d09-8176-1bd7690e12f2">
+
+### Semaphore - Producer-Consumer Problem
+- 생산자(Producer) 프로세스: 메시지를 생성하는 프로세스 그룹
+- 소비자(Consumer) 프로세스: 메시지를 전달받는 프로세스 그룹
+
+<img width="1087" alt="image" src="https://github.com/SSAFY11thDaejeon7/cs_study/assets/81237987/98e88870-ba07-4db8-81e9-50495789e43a">
+
+### Producer-Consumer Problem with single buffer
+<img width="567" alt="image" src="https://github.com/SSAFY11thDaejeon7/cs_study/assets/81237987/3123e886-e817-4eb4-9a92-efffa1271338">
+
+### Producer-Consumer Problem with N-buffers
+<img width="1026" alt="image" src="https://github.com/SSAFY11thDaejeon7/cs_study/assets/81237987/d057115e-2c26-489e-b706-0a28d963802a">
+
+### Reader-Writer Problem
+- Reader: 데이터에 대해 읽기 연산만 수행
+- Writer: 데이터에 대해 갱신 연산을 수행
+- 데이터 무결성 보장 필요
+    - Reader들은 동시에 데이터 접근 가능
+    - Writer들(또는 Reader와 Wrter)이 동시 데이터 접근 시 상호배제(동기화) 필요
+- 해결법
+    - Reader / Writer에 대해 우선권 부여
+        - Reader Preference Solution
+        - Writer Preference Solution
+
+### Reader-Writer Problem (Reader Preference Solution)
+<img width="1018" alt="image" src="https://github.com/SSAFY11thDaejeon7/cs_study/assets/81237987/673f7466-ff85-4e4a-84e4-319a639dca0f">
+
+### Semaphore의 장/단점
+- 장점: No Busy waiting → 기다려야 하는 프로세스는 block(asleep) 상태가 됨
+- 단점: Semaphore Queue에 대한 wake-up 순서가 비결정적 → Starvation Problem 발생 가능
