@@ -40,16 +40,16 @@
 #### Process synchronization
 - Process들의 실행 순서 맞추기
   - 프로세스들은 병행적이며, 비동기적으로 수행
-<img width="974" alt="스크린샷 2024-01-29 오후 11 55 57" src="https://github.com/SSAFY11thDaejeon7/cs_study/assets/129651243/d3ddb561-b1f7-4707-847a-3cd09deb7766">
+<img width="400" alt="스크린샷 2024-01-29 오후 11 55 57" src="https://github.com/SSAFY11thDaejeon7/cs_study/assets/129651243/d3ddb561-b1f7-4707-847a-3cd09deb7766">
 
 #### Producer-Consumer problem
 - 생산자(Producer) 프로세스
   - 메시지를 생성하는 프로세스 그룹
 - 소비자(Consumer) 프로세스
   - 메세지 전달받는 프로세스 그룹
-<img width="835" alt="스크린샷 2024-01-29 오후 11 54 39" src="https://github.com/SSAFY11thDaejeon7/cs_study/assets/129651243/7421700e-a817-4963-945f-f5c6a36b42bc">
+<img width="400" alt="스크린샷 2024-01-29 오후 11 54 39" src="https://github.com/SSAFY11thDaejeon7/cs_study/assets/129651243/7421700e-a817-4963-945f-f5c6a36b42bc">
 
-<img width="940" alt="스크린샷 2024-01-29 오후 11 47 11" src="https://github.com/SSAFY11thDaejeon7/cs_study/assets/129651243/66414c08-39cb-4313-a5d3-8dc8575ba285">
+<img width="400" alt="스크린샷 2024-01-29 오후 11 47 11" src="https://github.com/SSAFY11thDaejeon7/cs_study/assets/129651243/66414c08-39cb-4313-a5d3-8dc8575ba285">
 
 #### Reader-Writer problem
 - Reader
@@ -61,7 +61,7 @@
   - Writer들이(또는 reader와 write) 동시에 데이터 접근 시, 상호배제(동기화)필요
 - 해결법
   - reader / writer 에 대한 우선권 부여
-<img width="1039" alt="스크린샷 2024-01-29 오후 11 49 55" src="https://github.com/SSAFY11thDaejeon7/cs_study/assets/129651243/a15555da-070f-4812-ad02-92e60c5d2f10">
+<img width="400" alt="스크린샷 2024-01-29 오후 11 49 55" src="https://github.com/SSAFY11thDaejeon7/cs_study/assets/129651243/a15555da-070f-4812-ad02-92e60c5d2f10">
 
 ### Semaphore 대표적 특징
 - No busy waiting
