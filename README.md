@@ -51,6 +51,8 @@
 | 3주차 | [[OS] Lecture 6. Process Synchronization and Mutual Exclusion (3/7)](https://www.youtube.com/watch?v=Zps0ckSvKys&list=PLBrGAFAIyf5rby7QylRc6JxU5lzQ9c4tN&index=14)                  |  24.01.29  |
 |     | [[OS] Lecture 6. Process Synchronization and Mutual Exclusion (4/7)](https://www.youtube.com/watch?v=33OqgesF-mM&list=PLBrGAFAIyf5rby7QylRc6JxU5lzQ9c4tN&index=15)                  |  24.01.29  |
 |     | [[OS] Lecture 6. Process Synchronization and Mutual Exclusion (5/7)](https://www.youtube.com/watch?v=CitsUz-Dx7A&list=PLBrGAFAIyf5rby7QylRc6JxU5lzQ9c4tN&index=16)                  |  24.01.29  |
+|     | [[OS] Lecture 6. Process Synchronization and Mutual Exclusion (6/7)](https://www.youtube.com/watch?v=S7l2UEXVhb0&list=PLBrGAFAIyf5rby7QylRc6JxU5lzQ9c4tN&index=17)                  |  24.01.31  |
+|     | [[OS] Lecture 6. Process Synchronization and Mutual Exclusion (7/7)](https://www.youtube.com/watch?v=AnYN-kbCbRI&list=PLBrGAFAIyf5rby7QylRc6JxU5lzQ9c4tN&index=18)                  |  24.01.31  |
 
 ## 📌스프링 동작원리
 
