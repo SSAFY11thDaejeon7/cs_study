@@ -104,3 +104,140 @@ n-process Mutual Exclusion 해결 방안
 - ME Primitive 실행 중에도 Preeptive 될 수 있음
 - 공유 데이터 수정 중은 interrupt를 억제할 수 있지만, overhead 발생
 - busy wait (기다리는 중에도 while문을 돈다 - 비효율적임)
+
+
+
+
+# 2. Mutual Exclusion Solution - HW Solution
+
+### TestAndSet(TAS) instruction
+
+- Test와 Set을 한 번에 수행하는 기계어
+- Machine Instruction
+    - Atomicity, Indivisible
+    - **실행 중 interrupt를 받지 않는 것이 보장됨 (Preemption 되지 않음) // 한번에 실행하는 것을 보장**
+    - Busy Waiting → Inefficient
+<img width="479" alt="TAS" src="https://github.com/SSAFY11thDaejeon7/cs_study/assets/110437548/26564e29-5f0f-40a9-adae-049bf20fa91f">
+
+- 3개 이상의 프로세스의 경우 Bounded Waiting 조건 위배
+    - 1번 나올때 3번, 3번 나올때 4번이 들어가면 2번은 들어갈 수 없음
+<img width="449" alt="n-process" src="https://github.com/SSAFY11thDaejeon7/cs_study/assets/110437548/86b9423f-6c29-428f-93b6-8479a38a04ba">
+
+
+### HW Solution 장단점
+
+- 장점: 구현이 간단하다
+- 단점: Busy Waiting
+- Busy Waiting 문제를 해소한 상호배제 기법
+    
+    → Semaphore: 대부분의 OS들이 사용
+    
+
+# 3. Mutual Exclusion Solution - OS Supported SW Solutions
+
+### Spinlock
+
+> P, V를 보장하지만 Busy Waiting..
+> 
+- 정수형 변수
+- 초기화, P(), V() 연산으로만 접근이 가능하다
+    - 위 연산들은 indivisible(or atomic) 연산
+    - OS support
+    - 전체가 한 instruction cycle에 수행됨
+    - P는 물건을 꺼내고, V는 물건을 집어넣는다.
+
+```java
+P(S) { // 해당 과정은 한번에 처리되는 것을 보장
+	while (S <= 0) do
+	endwhile;
+	S <- S - 1;
+}
+```
+
+```java
+V(S) { // 해당 과정은 한번에 처리되는 것을 보장
+	S <- S + 1;
+}
+```
+<img width="478" alt="spinlock" src="https://github.com/SSAFY11thDaejeon7/cs_study/assets/110437548/c73b74b9-c04d-4674-8a1d-7185a6d7cfdf">
+
+
+### Spinlock 문제점
+
+- 멀티 프로세서 시스템에서만 사용 가능 (CPU 2개 이상)
+- Busy Waiting (While문에서 뱅뱅 돌고있음..)
+
+### Semaphore
+
+- 1965년 Dijkstra가 제안
+- Busy Waiting 문제 해결
+- 음이 아닌 정수형 변수(S)
+    - 초기화 연산, P(), V()로만 접근 가능
+    - P: Probern(검사), V: Verhogen(증가)
+    - S는 물건의 개수라고 생각하기
+
+- **임의의 S 변수 하나에 ready queue 하나가 할당됨!**
+
+### Semaphore의 분류
+
+- Binary Semaphore
+    - S가 0과 1 두 종류의 값만 갖는 경우
+    - 상호배제나 프로세스 동기화의 목적으로 사용
+- Counting Semaphore
+    - S가 0이상의 정수값을 가질 수 있는 경우
+    - Producer-Consumer 문제 등을 해결하기 위해 사용
+        - 생산자 - 소비자 문제
+
+### Semaphore 연산자
+
+- 초기화 연산 : S 변수에 초기값을 부여하는 연산
+- P()연산, V()연산
+![semaphore1](https://github.com/SSAFY11thDaejeon7/cs_study/assets/110437548/b5381954-63b0-48a0-a003-6d0836441c12)
+
+
+- 모두 indivisible 연산
+    - OS support
+    - 전체가 한 instruction cycle에 수행 됨
+![semaphore2](https://github.com/SSAFY11thDaejeon7/cs_study/assets/110437548/91a35be1-3480-46bd-91b0-ed4208bd5153)
+
+
+### Process Synchronization 문제 Semaphore로 해결하기
+
+- 프로세스들의 실행 순서 맞추기
+- 프로세스들은 병행적이며, 비동기적으로 수행한다.
+![semaphore3](https://github.com/SSAFY11thDaejeon7/cs_study/assets/110437548/6b3c92c2-f36f-4b52-9743-db36b4283ed0)
+
+
+### Producer-Consumer Problem
+
+- 생산자 프로세스: 메시지를 생성하는 프로세스 그룹
+- 소비자 프로세스; 메세지 전달받는 프로세스 그룹
+- “동기화 필요’ : 생산 중일때 소비하면 안되고, 다른 생산자가 생산중일때 생산해도 안된다.
+    - Producer-Consumer Problem with single buffer
+    ![semaphore4](https://github.com/SSAFY11thDaejeon7/cs_study/assets/110437548/bc862f1e-c8fd-44a2-b3dc-c7c8124dc658)
+
+    
+    ```java
+    소비 하였는가? -> 1
+    생산 하였는가? -> 0
+    ```
+    
+    - Producer-Consumer Problem with N buffer
+    ![semaphore5](https://github.com/SSAFY11thDaejeon7/cs_study/assets/110437548/05113c41-b95d-469f-adbb-23f906d719e6)
+
+    
+- Reader-Writer Problem
+    - Reader: 데이터에 대해 읽기 연산만 수행
+    - Writer: 데이터에 대해 갱신 연산을 수행
+- 데이터 무결성 보장 필요
+    - Reader들은 동시에 데이터 접근 가능
+    - Writer들이 동시 데이터 접근 시, 상호배제 필요
+- 해결법
+    - reader/writer에 대한 우선권 부여
+        - reader preference solution
+        - writer preference solution
+
+### Semaphore 장단점
+
+- No busy waiting; 기다려야 하는 프로세스는 block 상태가 됨
+- Semaphore queue에 대한 wake-up 순서는 비결정적임 ; starvation problem
