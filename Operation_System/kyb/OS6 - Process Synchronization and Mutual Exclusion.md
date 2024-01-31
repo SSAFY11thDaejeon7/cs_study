@@ -219,3 +219,114 @@
     - Writer들(또는 reader와 write)이 동시 데이터 접근 시, 상호 배제(동기화) 필요
 - 해결법
     - reader / writer에 대한 우선권 부여
+ 
+## Eventcount/Sequencer
+
+은행의 번호표와 비슷한 개념
+
+Semaphore의  비결정적 wake-up 문제를 해결하기 위해 등장
+
+- Sequencer
+    - 정수형 변수
+    - 생성시 0으로 초기화, 감소하지 않음
+    - 발생 사건들의 순서 유지
+    - ticket() 연산으로만 접근 가능
+- ticket(S)
+    - 현재까지 ticket() 연산이 호출 된 횟수를 반환
+    - indivisible operation
+- Eventcount
+    - 정수형 변수
+    - 생성시 0으로 초기화, 감소하지 않음
+    - 특정 사건의 발생 횟수를 기록
+    - read(E), advance(E), await(E, v) 연산으로만 접근 가능
+- read(E): 현재 Eventcount 값 반환
+- advance(E): E(번호)를 1 증가시키고, E를 기다리고 있는 프로세스를 깨움(wake-up)
+- await(E, v)
+    - 정수형 변수
+    - if (E<v)이면 E에 연결된 queue에 프로세스 전달(push) 및 CPU 스케줄러 호출
+
+- No busy waiting
+- No starvation
+- Semaphore보다 더 low-level control이 가능
+
+**Eventcounter를 통한 생산자-소비자 문제 해결**
+
+![image](https://github.com/SSAFY11thDaejeon7/cs_study/assets/90568693/dc43e4b9-1dae-4e69-8fba-95bba731479c)
+
+
+- P(생산자)는 t라는 번호표를 받고, 해당 순서가 되면 진입 시도(표를 통해 한번에 한 프로세스만 진입) →공간이 있는 상태(await ≥ t - N + 1)라면 작업 진행 후 종료
+- C(소비자)는 c라는 번호표를 받고, 해당 순서가 되면 진입 시도 → 물건이 있는 상태(in ≥ u + 1)이라면, buffer에 진입, 작업 진행 후 종료
+
+## Monitor
+
+- 공유 데이터와 Critical section의 집합
+    - 한 번에 한 명만 진입 가능한 책방의 개념
+- Conditional variable
+    - wait(), signal() operations
+- 진입 큐: 모니터 내의 procedure 수 만큼 존재
+- 상호 배제: 모니터 내에는 항상 하나의 프로세스만 진입 가능
+- 정보 은폐: 공유 데이터는 모니터 내의 프로세스만 접근 가능
+- 조건 큐: 모니터 내의 특정 이벤트를 기다리는 프로세스가 대기하는 곳
+- 신호 제공자 큐: 모니터에 항상 하나의 신호 제공자 큐가 존재, signal() 명령을 실행한 프로세스가 임시 대기
+
+### 자원 할당 시나리오
+
+![image](https://github.com/SSAFY11thDaejeon7/cs_study/assets/90568693/693367e1-8ea5-473f-92d4-389b7c8e42a5)
+
+
+자원이 1인 상태에서 시작 
+
+→ Pj가 Monitor에 진입하여 자원을 할당 받음
+
+→ Monitor 밖으로 나와 자원을 사용
+
+![image](https://github.com/SSAFY11thDaejeon7/cs_study/assets/90568693/504f0dd9-6881-4898-9946-be1cc2b6f759)
+
+
+→ Pk와 Pm도 순차적으로 Monitor에 진입
+
+→ 현재 가용 자원이 없어 condition queue에서 대기
+
+→ 작업을 마친 Pj는 Monitor에 진입하여 자원을 반납
+
+![image](https://github.com/SSAFY11thDaejeon7/cs_study/assets/90568693/35d725a2-4508-43a5-8240-513b309280a8)
+
+
+→ Pk를 깨워야 하지만, Monitor에는 한 프로세스만 존재 가능하기에, Pj는 signaler queue로 이동
+
+→ Pj가 Pk를 wake-up, Pk는 Monitor에 진입하여 자원을 할당 받음
+
+![image](https://github.com/SSAFY11thDaejeon7/cs_study/assets/90568693/3d8dc895-a60f-4f93-86e4-26e50d4204bd)
+
+
+→ 자원을 할당 받은 Pk는 Monitor 밖으로 이동
+
+→ signaler queue에 있던 Pj가 다시 Monitor로 진입
+
+→ 남은 작업 완료 후 Monitor 밖으로 이동
+
+### 식사하는 철학자들 문제
+
+- 5명의 철학자
+- 철학자들은 생각하는 일, 스파게티 먹는 일만 반복함
+- 공유 자원: 스파게티, 포크
+- 스파게티를 먹기 위해선, 좌우 포크 2개를 모두 들어야 함
+
+![image](https://github.com/SSAFY11thDaejeon7/cs_study/assets/90568693/26893dce-ef36-4bdc-a51c-16068fddd385)
+
+
+![image](https://github.com/SSAFY11thDaejeon7/cs_study/assets/90568693/2e7084e0-8288-44ab-8202-5b0ab20bbae1)
+
+
+![image](https://github.com/SSAFY11thDaejeon7/cs_study/assets/90568693/18d67dfb-d856-41e8-8c91-b645cd0cd93b)
+
+
+### Monitor의 장점
+
+- 사용이 쉬움
+- Deadlock 등 error 발생 가능성이 낮음
+
+### Monitor의 단점
+
+- 지원하는 언어에서만 사용 가능
+- 컴파일러가 OS를 이해하고 있어야 함(임계 영역 접근을 위한 코드를 생성)
