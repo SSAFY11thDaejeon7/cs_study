@@ -241,3 +241,57 @@ V(S) { // 해당 과정은 한번에 처리되는 것을 보장
 
 - No busy waiting; 기다려야 하는 프로세스는 block 상태가 됨
 - Semaphore queue에 대한 wake-up 순서는 비결정적임 ; starvation problem
+
+### Eventcount / Sequencer
+
+- 은행의 번호표와 비슷한 개념
+- **Sequencer**
+    - 정수형 번호
+    - 생성 시 0으로 초기화, 감소하지 않음
+    - 발생 사건들의 순서 유지
+    - ticket() 연산으로만 접근 가능
+- **ticket(S)**
+    - 현재까지 ticket() 연산이 호출 된 횟수를 반환
+- **EventCount**
+    - 정수형 변수
+    - 생성 시 0으로 초기화, 감소하지 않음
+    - 특정 사건으로 발생 횟수를 기록
+    - read(E), advance(E), await(E, v) 연산으로만 접근 가능
+- **read(E)**
+    - 현재 **EventCount**값 반환
+- **advance(E)**
+    - E ← E+1
+    - E를 기다리고 있는 프로세스를 깨움 (wake-up)
+- **await(E, v)**
+    - V는 정수형 변수
+    - if (E < v)이면 E에 연결된 Qe에 프로세스 전달 (push) 및 CPU scheduler 호출
+- 장단점
+    - No busy waiting
+    - No startvation
+    - Semaphore 보다 더 low-level control이 가능
+
+# 4. Language-Level solution - Monitor
+
+- Monitor
+- Flexible
+- Difficult to use
+    - Error-prone
+
+### High-level Mechanism
+
+- Monitor
+    - 공유 데이터와 Critical section의 집합
+    - conditional variable
+    - wait(), signal() operations
+- Monitor의 구조
+    - Entry queue
+    - Mutual exclusion
+    - information hiding(정보 은폐)
+    - condition queue(조건 큐)
+    - signaler queue (신호제공자 큐)
+- 자원할당 문제
+    - 책을 대출, 반납하는 구조
+- Producer - Consumer Problem
+- 장단점
+    - 장점: 사용이 쉽다,  Deadlock 등 error 발생 가능성이 낮다
+    - 단점: 지원하는 언어에서만 사용이 가능하다, 컴파일러가 os를 이해하고 있어야한다
