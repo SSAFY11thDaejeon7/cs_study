@@ -219,3 +219,102 @@
 ### Semaphore의 장/단점
 - 장점: No Busy waiting → 기다려야 하는 프로세스는 block(asleep) 상태가 됨
 - 단점: Semaphore Queue에 대한 wake-up 순서가 비결정적 → Starvation Problem 발생 가능
+
+# Eventcount / Sequencer
+### Sequencer
+- 정수형 변수
+- 생성시 0으로 초기화, 감소하지 않음
+- 발생 사건들의 순서 유지
+- ticket() 연산으로만 접근 가능
+    - ticket(S)
+        - 현재까지 ticket()연산이 호출 된 횟수를 반환
+        - Indivisible operation
+
+### Eventcount
+- 정수형 변수
+- 생성시 0으로 초기화, 감소하지 않음
+- 특정 사건의 발생 횟수를 기록
+- read(E), advance(E), await(E, v) 연산으로만 접근 가능
+    - read(E)
+        - 현재 Eventcount 값 반환
+    - advance(E)
+        - E ← E + 1
+        - E를 기다리고 있는 프로세스를 깨움
+    - await(E, v)
+        - V는 정수형 변수
+        - if(E < v) 이면 E에 연결된 QE에 프로세스 전달(push) 및 CPU Scheduler 호출
+
+<img width="647" alt="image" src="https://github.com/SSAFY11thDaejeon7/cs_study/assets/81237987/b8f72b9a-db01-43d5-8d6e-6a8643fa328e">
+
+### Producer-Consumer Problem
+<img width="1218" alt="image" src="https://github.com/SSAFY11thDaejeon7/cs_study/assets/81237987/380a61ad-e548-460f-98fd-171dfad8ab8f">
+
+### Eventcount / Sequencer 특징
+- No Busy waiting
+- No Starvation
+- Semaphore 보다 더 low-level control이 가능
+
+# Language-Level Solution
+### High-Level Mechanism
+- Language-level Constructs
+- Object-Oriented Concept 와 유사
+- 사용이 쉬움
+
+### Monitor
+- 공유 데이터와 Critical Section의 집합
+- Conditional Variable
+    - wait(), signal() operations
+
+<img width="969" alt="image" src="https://github.com/SSAFY11thDaejeon7/cs_study/assets/81237987/bad3e57f-64be-49e7-822a-e4ba9dc0ce15">
+
+### Monitor의 구조
+- Entry Queue(진입 큐)
+    - 모니터 내의 procedure 수만큼 존재
+- Mutual Exclusion
+    - 모니터 내에는 항상 하나의 프로세스만 진입 가능
+- Information Hiding(정보 은폐)
+    - 공유 데이터는 모니터 내의 프로세스만 접근 가능
+- Condition Queue(조건 큐)
+    - 모니터 내의 특정 이벤트를 기다리는 프로세스가 대기
+- Signaler Queue(신호제공자 큐)
+    - 모니터에 항상 하나의 신호제공자 큐가 존재
+    - signal() 명령을 실행한 프로세스가 임시 대기
+
+### 자원 할당 문제
+<img width="991" alt="image" src="https://github.com/SSAFY11thDaejeon7/cs_study/assets/81237987/d2d27949-6234-48c6-8676-36d2e0b61890">
+
+<img width="407" alt="image" src="https://github.com/SSAFY11thDaejeon7/cs_study/assets/81237987/fed61665-6fe4-44fe-b617-52e12a676695">
+
+### Monitor - Producer-Consumer Problem
+<img width="611" alt="image" src="https://github.com/SSAFY11thDaejeon7/cs_study/assets/81237987/754cbc87-3782-42f3-bbeb-956e069067d9">
+
+### Monitor - Reader-Writer Problem
+- reader/writer 프로세스들간의 데이터 무결성 보장 기법
+- writer 프로세스에 의한 데이터 접근 시에만 상호 배제 및 동기화 필요함
+- 모니터 구성
+    - 변수 2개
+        - 현재 읽기 작업을 진행하고 있는 reader 프로세스의 수
+        - 현재 writer 프로세스가 쓰기 작업을 진행 중인지 표시
+    - 조건 큐 2개
+        - reader/writer 프로세스가 대기해야 할 경우에 사용
+    - 프로시져 4개
+        - reader(writer) 프로세스가 읽기(쓰기) 작업을 원할 경우에 호출, 읽기(쓰기) 작업을 마쳤을 때 호출
+
+<img width="998" alt="image" src="https://github.com/SSAFY11thDaejeon7/cs_study/assets/81237987/9b343c13-750e-48c5-b10f-ef07d9168cbb">
+
+### Dining Philosopher Problem
+- 5명의 철학자
+- 철학자들은 생각하는 일, 스파게티 먹는 일만 반복함
+- 공유 자원: 스파게티, 포크
+- 스파게티를 먹기 위해서는 좌우 포크 2개 모두 들어야함
+
+<img width="706" alt="image" src="https://github.com/SSAFY11thDaejeon7/cs_study/assets/81237987/56572c7e-4d08-4626-8674-917bf1724bf0">
+
+### Monitor 장/단점
+- 장점
+    - 사용이 쉽다
+    - Deadlock 등의 error 발생 가능성이 낮음
+- 단점
+    - 지원하는 언어에서만 사용 가능
+    - 컴파일러가 OS를 이해하고 있어야 함
+        - Critical Section 접근을 위한 코드 생성
