@@ -292,3 +292,119 @@ busy waiting을 없앴다! CS영역 못 들어가는 프로세스들은 ready qu
 **하지만** **단점**
 
 wake up 순서를 어떻게 해야할지? starvation 현상 여전히 발생할 수 있다.
+
+
+
+wake up 순서를 정하기 위해(starvation 현상 방지하기 위해)
+
+**Eventcount / Sequencer** 탄생
+
+## Eventcount / Sequencer
+
+은행의 번호표와 비슷한 개념
+
+**Sequencer**
+
+정수형 변수. 번호표 기계
+
+생성시 0으로 초기화. 값이 감소하지 않고 계속 증가만함.
+
+ticket() 연산으로만 접근 가능하다.
+
+**ticket(S)**
+
+번호표 뽑는 행위
+
+ticket() 연산이 호출된 횟수를 반환.
+
+**Eventcount**
+
+정수형 변수. 0으로 초기화 + 증가만 함.
+
+특정 사건의 발생 횟수를 기록
+
+read(E), advance(E), await(E,V) 연산으로만 접근 가능
+
+read(E) : 현재 eventcount 값 반환
+
+advance(E) : Eventcount값 증가(E ← E+1).   E를 기다리고 있는 프로세스를 깨움.
+
+await(E,V) : V는 정수형 변수. if(v > E) : 내 번호가 eventcount값보다 크면, queue에 가서 기다린다. 자기 번호보다 eventcount가 같거나 커지면, queue에서 나올 수 있게 된다.
+
+** semaphore의 wakeup 순서 즉 starvation 현상을 방지할 수 있게 됨.
+
+**Eventcount / Sequencer 로 producer-consumer 문제 해결**
+
+![image](https://github.com/SSAFY11thDaejeon7/cs_study/assets/138864974/903259cb-4499-4eb6-a38a-39db2e498c1e)
+
+- t ← ticket(Pticket) + await(In,t) : P연산. 티켓을 끊고 내 번호표가 될때까지 기다린다.
+- advance(In) : V연산. 내 작업을 모두 수행하고 번호표를 1 증가시킨다
+
+이 두가지 연산으로 안의 영역을 CS영역으로 보호한다.
+
+producer입장
+
+await(Out, t-N+1) : buffer에 공간이 있는지 check
+
+N : 전체 buffer 공간 수
+
+t : producer들이 번호표 뽑아간 개수
+
+Out : consumer들이 사용해서 빼간 개수
+
+N -t + out > 1 즉, out > t - N + 1       == > await연산 정의에 따라 await(Out, t-N+1) 로 표현할 수 있다.
+
+consumer입장
+
+buffer에 남은 물건수 ≥ 1인지 check =⇒ await(In, u+1);
+
+**결론**
+
+Eventcount / Sequencer는 Semaphore처럼 no busy waiting 특성 + No starvation + semaphore보다 더욱 low level 컨트롤 가능(순서를 제어하므로)
+
+### 현재까지 Mutual Exclusion의 SW solution(Dekker, Dijkstra’s algorithm), HW solution(TAS instruction), OS supported SW solution(spinlock, semaphore, eventcounter/sequencer) 에 대해 알아봤다. 하지만 low level이라서 복잡하고 logical error가 발생할 위험성이 크다.
+
+그래서 High-level (Language-level) solution들이 탄생함.
+
+그 중 **Monitor**에 대해 학습.
+
+**Monitor**
+
+**개념**
+
+programming language로 mutual exclusion을 쉽게 구현할 수 있다.
+
+Critical data + Critical Section을 모아놓은 것을 Monitor라고 한다. 한 번에 한명만 들어올 수 있음
+
+- Entry queue : 모니터 내의 procedure(function) 수만큼 존재
+- Condition queue : 모니터 내의 특정 이벤트를 기다리는 프로세스가 대기하는 큐
+- Signaler queue : condition queue에 신호를 보내서 프로세스들이 나올 수 있게 하는 큐. 모니터엔 항상 하나의 Signaler queue가 존재
+
+![image](https://github.com/SSAFY11thDaejeon7/cs_study/assets/138864974/4f321d18-b71d-45fc-b706-4394abae1c23)
+
+![image](https://github.com/SSAFY11thDaejeon7/cs_study/assets/138864974/4c3e0cf8-1ba3-4fe7-a331-1fd87f9644db)
+
+1. requestR 큐에 프로세스들이 진입
+2. Monitor에 1명만 들어갈 수 있고 자원도 1개이므로 R_available : 1→ 0 으로 만들고 자원을 가져다가 밖에서 사용.
+3. 그 중 들어온 프로세스들은 자원이 없으므로 condition queue에서 대기.
+4. 작업 마치면 releaseR 큐 → signaler queue로 이동해서 condition queue에 신호를 보내서 깨워줘야한다. Monitor에는 한 개의 프로세스만 있을 수 있으므로 signaler queue로 자리를 비워줘야함.
+
+**Monitor로 producer-consumer 문제 해결**
+
+![image](https://github.com/SSAFY11thDaejeon7/cs_study/assets/138864974/38eee38d-e305-4b11-a6ab-1704c8ae7b63)
+
+**Monitor로 reader-writer 문제 해결**
+
+![image](https://github.com/SSAFY11thDaejeon7/cs_study/assets/138864974/b30cf07d-9926-4fe8-bab4-1d16409f8461)
+
+**Monitor로 Dining philosophy 문제 해결**
+
+- 철학자들 N명, 포크 N
+- 철학자는 양옆 포크 2개를 집어야 식사를 진행할 수 있다
+
+![image](https://github.com/SSAFY11thDaejeon7/cs_study/assets/138864974/94b36e01-88bc-4a77-aceb-c9487f50f8b3)
+
+**Monitor 정리**
+
+- 장점 : 사용이 쉽고, deadlock등 logical error가 발생할 가능성이 낮다
+- 단점 : 지원하는 언어가 지원해야 사용 가능하고, 컴파일러가 OS를 이해하고 있어야 사용이 가능하다.
