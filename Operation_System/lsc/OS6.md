@@ -197,5 +197,115 @@
         - Semaphore queue에 대한 wake-up 순서는 비결정적
           - Starvation problem
     - Eventcount/sequencer
+      - 은행의 번호표와 비슷한 개념
+      - Sequencer
+        - 정수형 변수
+        - 생성시 0으로 초기화, 감소하지 않음
+        - 발생 사건들의 순서 유지
+        - ticket() 연산으로만 접근 가능
+      - ticket(S)
+        - 현재까지 ticket() 연산이 호출된 횟수를 반환
+        - Indivisible operation
+      - Eventcount
+        - 정수형 변수
+        - 생성시 0으로 초기화, 감소하지 않음
+        - 특정 사건의 발생 횟수를 기록
+        - read(E), advance(E), await(E,v) 연산으로만 접근 가능
+      - read(E)
+        - 현재 Eventcount값 반환
+      - advance(E)
+        - E <- E + 1
+        - E를 기다리고 있는 프로세스를 깨움 (wake-up)
+      - await(E,v)
+        - V는 정수형 변수
+        - if(E<v)이면 E에 연결된 Q_E에 프로세스 전달(push) 및 CPU scheduler 호출
+      - Mutual exclusion
+        ![image](https://github.com/SSAFY11thDaejeon7/cs_study/assets/68500724/b0040ad2-96cb-4213-b0f6-4187511c5107)
+
+      - Producer-Consumer problem
+        ![image](https://github.com/SSAFY11thDaejeon7/cs_study/assets/68500724/601c3ada-402b-4304-8efd-a11d05639fba)
+
+      - No busy waiting
+      - No starvation
+        - FIFO scheduling for Q_E
+      - Semaphore보다 더 low-level control이 가능
 - **Language-Level solution**
-    - Monitor
+  - Monitor
+    - 공유 데이터와 Critical section의 집합
+    - Conditional variable
+      - wait(), signal() operations
+        ![image](https://github.com/SSAFY11thDaejeon7/cs_study/assets/68500724/a740a71c-ebe2-4f27-8687-02dd714dbd8d)
+
+    - Entry queue(진입 큐)
+      - 모니터 내의 prodecure 수만큼 존재
+    - Mutual exclusion
+      - 모니터 내에는 항상 하나의 프로세스만 진입 가능
+    - Information hiding(정보 은폐)
+      - 공유 데이터는 모니터 내의 프로세스만 접근 가능
+    - Condition queue(조건 큐)
+      - 모니터 내의 특정 이벤트를 기다리는 프로세스가 대기
+    - Signaler queue(신호제공자 큐)
+      - 모니터에 항상 하나의 신호제공자 큐가 존재
+      - signal() 명령을 실행한 프로세스가 임시 대기
+    - 자원 할당 문제
+      ![image](https://github.com/SSAFY11thDaejeon7/cs_study/assets/68500724/373c2fa5-7457-4525-b54e-8007cd14610e)
+      ![image](https://github.com/SSAFY11thDaejeon7/cs_study/assets/68500724/f2268ccc-5738-445b-b4db-1b6121932548)
+
+
+    - 자원 할당 시나리오
+      - 자원 R 사용 가능
+      - Monitor 안에 프로세스 없음
+        ![image](https://github.com/SSAFY11thDaejeon7/cs_study/assets/68500724/a0b344bd-a1ce-480f-b103-180d37f49f49)
+
+      - 프로세스 Pj가 모니터 안에서 자원 R을 요청
+        ![image](https://github.com/SSAFY11thDaejeon7/cs_study/assets/68500724/7de38d44-c56c-4735-b5f9-76275eda9ad7)
+
+      - 자원 R이 Pj에게 할당 됨
+      - 프로세스 Pk가 R 요청, Pm 또한 R 요청
+        ![image](https://github.com/SSAFY11thDaejeon7/cs_study/assets/68500724/c554e5b2-70cf-4ad1-ab23-9576daa7108c)
+
+      - Pj가 R 반환
+      - R_Free.signal() 호출에 의해 Pk가 wakeup
+        ![image](https://github.com/SSAFY11thDaejeon7/cs_study/assets/68500724/1e5b95f3-52ab-4d39-9e27-57894eea11ba)
+
+      - 자원 R이 Pk에게 할당 됨
+      - Pj가 모니터 안으로 돌아와서, 남은 작업 수행
+        ![image](https://github.com/SSAFY11thDaejeon7/cs_study/assets/68500724/28048d02-dd1a-45ac-8c72-5ce5eee9dec7)
+
+    - Producer-Consumer Problem
+      ![image](https://github.com/SSAFY11thDaejeon7/cs_study/assets/68500724/3857cd1b-666c-42b2-a794-c5c7a5db512d)
+      ![image](https://github.com/SSAFY11thDaejeon7/cs_study/assets/68500724/0f4abb89-fb0d-4190-b97f-46999035b499)
+
+    - Reader-Writer Problem
+      - reader/writer 프로세스들간의 데이터 무결성 보장 기법
+      - writer 프로세스에 의한 데이터 접근 시에만 상호 배제 및 동기화 필요함
+      - 모니터 구성
+        - 변수 2개
+          - 현재 읽기 작업을 진행하고 있는 reader 프로세스의 수
+          - 현재 writer 프로세스가 쓰기 작업을 진행 중인지 표시
+        - 조건 큐 2개
+          - reader/writer 프로세스가 대기해야 할 경우에 사용
+        - 프로시져 4개
+          - reader(writer) 프로세스가 읽기(쓰기) 작업을 원할 경우에 호출, 읽기(쓰기) 작업을 마쳤을 때 호출
+        ![image](https://github.com/SSAFY11thDaejeon7/cs_study/assets/68500724/20b696a4-6e47-4141-a396-f39e32a96a46)
+
+    - Dining philosopher problem
+      - 5명의 철학자
+      - 철학자들은 생각하는 일, 스파게티 먹는 일만 반복함
+      - 공유 자원: 스파게티, 포크
+      - 스파게티를 먹기 위해서는 좌우 포크 2개 모두 들어야 함
+        ![image](https://github.com/SSAFY11thDaejeon7/cs_study/assets/68500724/c11aa54e-d221-4965-9903-0f4967c6ea56)
+        ![image](https://github.com/SSAFY11thDaejeon7/cs_study/assets/68500724/6fb72566-cd17-4646-8257-eef99064dcee)
+        ![image](https://github.com/SSAFY11thDaejeon7/cs_study/assets/68500724/c6dc2258-9360-439b-869c-28735449486c)
+        ![image](https://github.com/SSAFY11thDaejeon7/cs_study/assets/68500724/86581632-4557-42c3-90d8-2f82675dbceb)
+
+
+
+
+    - 장점
+      - 사용이 쉽다
+      - Deadlock 등 error 발생 가능성이 낮음
+    - 단점
+      - 지원하는 언어에서만 사용 가능
+      - 컴파일러가 OS를 이해하고 있어야 함
+        - Critical section 접근을 위한 코드 생성
