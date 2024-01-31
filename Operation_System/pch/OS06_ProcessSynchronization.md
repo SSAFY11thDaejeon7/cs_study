@@ -81,7 +81,7 @@
 3. OS supported SW solution
 
 ## OS Supported SW solution
-<h3>Spinlock</h3>
+<h3>1. Spinlock</h3>
 
 - 정수 변수
 - P(), V() 연산으로만 접근 가능하며 S 정수 변수로 접근 가능여부 판단
@@ -92,7 +92,7 @@
 ![image](https://github.com/SSAFY11thDaejeon7/cs_study/assets/91451735/f5977fb7-d925-41c3-bee7-e9470a16cdad)
 <br><br>
 
-<h3>Semaphore</h3>
+<h3>2. Semaphore</h3>
 
 - Spinlock과 비슷하게 정수형 변수 S, 초기화 연산 P(), V() 함수 사용
 - 임의의 S 변수 하나에 ready queue 하나가 할당 됨
@@ -125,3 +125,45 @@
   - 프로세서 할당을 위해 기다리는 프로세스는 큐에 asleep 상태가 되어있기 때문에 busy waiting이 발생하지 않음
   - 큐에서 꺼내지는 프로세스는 무작위이므로, 특정 작업이 계속해서 호출되지 않는 startvation 문제가 발생할 수 있음
 
+<h3>3. Event/Sequencer</h3>
+
+- 은행 창구의 번호표와 비슷한 원리
+- 정수형 변수를 두고 생성시 0으로 초기화, 감소하지 않음
+- 무작위로 선택되는 Semaphore와 달리 번호 부여를 통해 발생 사건들의 순서를 유지한다.
+- 임계 구역 내의 작업이 끝나면, 다음 번호에 해당하는 프로세스를 실행시킴
+- 장점
+    - 대기 큐 사용을 통해 Busy Waiting 문제 해결
+    - 순번을 매기기 때문에, 계속해서 프로세서를 할당 받지 못하는 Starvation 문제 해결
+    - 순번을 사용한 제어로 Semaphore보다 더 low-level 제어가 가능
+ <br><br>
+
+## Language-Level solution
+- 기존 방법들에 비해 사용이 쉬움
+- <br>
+
+<h3>Monitor</h3>
+
+- 구조
+  - Entity queue(진입 큐) : 모니터 내의 함수(procedure) 수만큼 존재
+  - Condition queue ( 조건 큐 ) : 모니터 내의 특정 이벤트를 기다리는 프로세스가 대기
+  - Signaler queue ( 신호제공자 큐 ) : 모니터에 항상 하나의 신호제공자 큐가 존재, 
+  <br>                                 signal을 다른 프로세스에게 보내기 위해 작업이 끝난 프로세스가 잠시 대기하는 공간
+![image](https://github.com/Chaeros/Plum/assets/91451735/789024a8-68f6-44f5-80bf-80c624b20ad7)
+
+- 특성
+  - Mutual exclusion : 모니터 내에는 항상 하나의 프로세스만 진입 가능
+  - INformation hiding ( 정보 은폐 )
+ 
+- 모니터로 해결가능한 문제
+  - 자원 할당 문제
+  - Producer Consumer problem
+  - Reader Writer Problem
+  - Dining philosopher problem
+  - 모두 임계 구역 설정을 통해, 임계 구역 내에 하나의 프로세스만 접근할 수 있도록하여 문제를 해결함
+
+- 장점
+  - 사용이 쉽다
+  - Deadlock 등 error 발생 가능성이 낮다
+- 단점
+  - 지원하는 언어에서만 사용 가능하다
+  - Critical section 접근을 위한 코드 생성을 위해 컴파일러가 OS를 이해하고 있어야 한다.
