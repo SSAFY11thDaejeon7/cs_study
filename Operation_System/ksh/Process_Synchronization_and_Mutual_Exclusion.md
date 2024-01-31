@@ -127,3 +127,98 @@
 - 장점: No busy waiting -> 기다려야하는 프로세스는 block(asleep)상태가 됨
 - 단점: 큐에 대한 wake-up 순서는 비결정적이므로 기아 현상이 발생할 수 있음
   
+## Eventcount / Sequencer
+> 은행의 번호표와 비슷한 개념
+
+- Semaphore의 기아 현상 문제를 해결할 수 있음
+- Sequeancer (은행 번호표 기계)
+  - 정수형 변수
+  - 생성시 0으로 초기화, 감소하지 않음
+  - 발생 사건들의 순서 유지
+  - ticket() 연산으로만 접근 가능
+- ticket(S)
+  - 현재까지 ticket() 연산이 호출된 횟수를 반환
+  - indivisible operation
+- Eventcount (은행 번호 전광판)
+  - 정수형 변수
+  - 생성시 0으로 초기화, 감소하지 않음
+  - 특정 사건의 발생 횟수를 기록
+  - read(E), advance(E), await(E, v) 연산으로만 접근 가능
+- read(E): 현재 Eventcount 값 반환
+- advance(E): E <- E + 1, E를 기다리고 있는 프로세스를 깨움 (wake-up)
+- await(E v)
+  - v는 정수형 변수 (내 번호표)
+  - if (E < v)이면 E에 연결된 Q에 프로세스 전달(PUSH) 및 CPUT scheduler 호출 (E는 은행 전광판에 있는 번호)
+ 
+- Mutual exclusion
+![8일차-1](https://github.com/SSAFY11thDaejeon7/cs_study/assets/80624927/e814da49-75a1-4c24-9162-3de79975577b)
+
+- 처음에 v에 0을 반환, S는 0 -> 1
+- E, v 둘 다 0이므로 기다리지않고 바로 임계영역에 감
+- 다음에 v에 1을 반환, S는 1 -> 2
+- E < v 이므로 대기실에서 기다리다가 앞 프로세스가 일을 끝내고 나와서 advance()하면 E는 1이 되고 E < v가 아니게 되어서 임계영역에 감
+
+- No busy waiting
+- No starvation
+  - FIFO scheduling for Q
+- Semaphore보다 더 low-level control이 가능
+
+## High-level Mechanism
+- Language-level constructs
+- 사용이 쉬움
+- Object-Oriented Concept와 유사함
+
+### Monitor
+- 공유 데이터와 Critical section의 집합 (최대 1개의 프로세스만 진입 가능)
+- Conditional variable
+  - wait(), signal() operations
+![8일차-2](https://github.com/SSAFY11thDaejeon7/cs_study/assets/80624927/698abd60-f988-42be-8d55-a20dece972b9)
+
+- Monitor의 구조
+  - 진입 큐: 모니터 내의 procedure 수만큼 존재
+  - Mutual exclusion
+    - 모니터 내에는 항상 하나의 프로세스만 진입 가능
+  - 정보 은폐
+    - 공유 데이터는 모니터 내의 프로세스만 접근 가능
+  - 조건 큐
+    - 모니터 내의 특정 이벤트를 기다리는 프로세스가 대기
+  - 신호제공자 큐 (전화 부스 같은 것)
+    - 모니터에 항상 하나의 신호제공자 큐가 존재
+    - signal() 명령을 실행한 프로세스가 임시 대기
+
+- 자원 할당 문제
+![8일차-3](https://github.com/SSAFY11thDaejeon7/cs_study/assets/80624927/6181610e-87e9-46c6-b322-4ceffc784c88)
+
+- 책방과 같음
+- releaseR: 반납하는 영역
+- requestQ: 대출하는 영역
+- R_Free: 책을 빌릴 수 있을 때 / codition queue: 책을 빌리기 위해 대기하는 공간
+- signaler queue: 신호제공자 큐
+
+- 자원 할당 시나리오
+  - 자원 R 사용 가능
+  - 프로세스Pj가 모니터 안에서 자원 R을 요청
+  - 자원 R이 프로세스Pj에게 할당됨
+  - 프로세스Pk, Pm이 condition_queue에서 R 요청
+  - Pj가 큐의 앞에 있는 프로세스 Pk를 signaler 큐에서 awake()한 뒤, releaseR에서 남은 일을 하고 밖으로 나감
+ 
+- Dining philosopher problem
+  - 5명의 철학자가 원형 테이블에 앉아 있음
+  - 철학자들은 생각하는 일, 스파게티 먹는 일만 반복함
+  - 공유 자원: 스파게티, 포크
+  - 스파게티를 먹기 위해서는 좌우 포크 2개 모두 들어야 함
+  - P:프로세스, 포크: 공유 데이터
+![8일차-5](https://github.com/SSAFY11thDaejeon7/cs_study/assets/80624927/d101f4e8-f771-4635-a974-d6ebab1b074e)
+
+![8일차-4](https://github.com/SSAFY11thDaejeon7/cs_study/assets/80624927/b64e33d4-dc78-4fae-b89b-16107c67d867)
+
+- numForks: 철학자들이 사용 가능한 포크 수
+- 음식을 다 먹으면 포크를 내리고 양쪽에 포크를 대기하고 있었으면 시그널을 주고 나옴
+
+- Monitor의 장점
+  - 사용이 쉽다
+  - Deadlock등 error 발생 가능성이 낮음
+- Monitor의 단점
+  - 지원하는 언어에서만 사용 가능
+  - 컴파일러가 OS를 이해하고 있어야 함
+    - 임계 영역 접근을 위한 코드 생성
