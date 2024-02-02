@@ -53,6 +53,9 @@
 |     | [[OS] Lecture 6. Process Synchronization and Mutual Exclusion (5/7)](https://www.youtube.com/watch?v=CitsUz-Dx7A&list=PLBrGAFAIyf5rby7QylRc6JxU5lzQ9c4tN&index=16)                  |  24.01.29  |
 |     | [[OS] Lecture 6. Process Synchronization and Mutual Exclusion (6/7)](https://www.youtube.com/watch?v=S7l2UEXVhb0&list=PLBrGAFAIyf5rby7QylRc6JxU5lzQ9c4tN&index=17)                  |  24.01.31  |
 |     | [[OS] Lecture 6. Process Synchronization and Mutual Exclusion (7/7)](https://www.youtube.com/watch?v=AnYN-kbCbRI&list=PLBrGAFAIyf5rby7QylRc6JxU5lzQ9c4tN&index=18)                  |  24.01.31  |
+|     | [[OS] Lec 7. Deadlock (1/5) - Deadlock and Resource types](https://www.youtube.com/watch?v=xvoEsy2zJnc&list=PLBrGAFAIyf5rby7QylRc6JxU5lzQ9c4tN&index=19)                  |  24.02.02  |
+|     | [[OS] Lec 7. Deadlock (2/5) - Deadlock and Resource types](https://www.youtube.com/watch?v=czjtYkjhtgo&list=PLBrGAFAIyf5rby7QylRc6JxU5lzQ9c4tN&index=20)                  |  24.02.02  |
+|     | [[OS] Lec 7. Deadlock (3/5) - Deadlock and Resource types](https://www.youtube.com/watch?v=XMrlt3ZwfM4&list=PLBrGAFAIyf5rby7QylRc6JxU5lzQ9c4tN&index=21)                  |  24.02.02  |
 
 ## 📌스프링 동작원리
 
