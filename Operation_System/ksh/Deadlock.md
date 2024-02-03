@@ -67,6 +67,7 @@
 ## Deadlock 발생의 예
 - 2개의 프로세스 (P1, P2)
 - 2개의 자원 (R1, R2)
+
 ![9일차-1](https://github.com/SSAFY11thDaejeon7/cs_study/assets/80624927/53566939-d407-4f07-8e6a-82101ad7158f)
 
 - 위 상황은 서로 가진 것을 반납하지 않고 요구하고 있는 상황 -> Deadlock 발생
@@ -78,11 +79,13 @@
 - Edge
   - Rj -> Pi: 자원 Rj가 프로세스 Pi에 할당됨
   - Pi -> Rj: 프로세스 Pi가 자원 Rj를 요청(대기 중)
+ 
 ![9일차-2](https://github.com/SSAFY11thDaejeon7/cs_study/assets/80624927/2884dd56-9f1c-4941-96fa-54b5ddd8d64c)
 
 ### State Transition Model
 - 2개의 프로세스와 A type의 자원 2개(unit) 존재
 - 프로세스는 한번에 자원 하나만 요청/반납 가능
+- 
 ![9일차-3](https://github.com/SSAFY11thDaejeon7/cs_study/assets/80624927/c0be0aff-08ea-459c-a537-f786bc3d4ec4)
 
 - S33의 경우 P1, P2가 자원을 서로 반납하지 않고 자원을 요구하게 되므로 Deadlock 발생
@@ -90,9 +93,9 @@
 ### Deadlock 발생 필요 조건
 - Exclusive use of resources: 자원의 특성
 - Non-preemptible resources: 자원의 특성
-- Hold and wait(Partial allocation): vmfhtptmdml xmrtjd
+- Hold and wait(Partial allocation): 프로세스의 특성
   - 자원을 하나 hold하고 다른 자원 요청
-- Circular wait: vmfhtptmdml xmrtjd
+- Circular wait: 프로세스의 특성
 - 위의 4가지 조건을 모두 만족해야 Deadlock이 발생함!
 
 ## Deadlock 해결 방법
