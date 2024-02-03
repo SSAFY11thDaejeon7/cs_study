@@ -95,7 +95,7 @@ Deadlock: Asleep 상태에 존재, 실행 될 가능성 X
 - Exclusive allocation resources
 - Non-preemptible resources
 
-프로세스의 특성
+**프로세스의 특성**
 
 - Hold and wait(Partial allocation)
     - 자원을 하나 hold하고 다른 자원 요청
