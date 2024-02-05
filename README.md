@@ -56,6 +56,8 @@
 |     | [[OS] Lec 7. Deadlock (1/5) - Deadlock and Resource types](https://www.youtube.com/watch?v=xvoEsy2zJnc&list=PLBrGAFAIyf5rby7QylRc6JxU5lzQ9c4tN&index=19)                  |  24.02.02  |
 |     | [[OS] Lec 7. Deadlock (2/5) - Deadlock and Resource types](https://www.youtube.com/watch?v=czjtYkjhtgo&list=PLBrGAFAIyf5rby7QylRc6JxU5lzQ9c4tN&index=20)                  |  24.02.02  |
 |     | [[OS] Lec 7. Deadlock (3/5) - Deadlock and Resource types](https://www.youtube.com/watch?v=XMrlt3ZwfM4&list=PLBrGAFAIyf5rby7QylRc6JxU5lzQ9c4tN&index=21)                  |  24.02.02  |
+| 4주차| [[OS] Lec 7. Deadlock (4/5) - Deadlock and Resource types](https://www.youtube.com/watch?v=qmtOsmixfsA&list=PLBrGAFAIyf5rby7QylRc6JxU5lzQ9c4tN&index=22)                  |  24.02.05  |
+|     | [[OS] Lec 7. Deadlock (5/5) - Deadlock and Resource types](https://www.youtube.com/watch?v=8XbSgZ2JPQ8&list=PLBrGAFAIyf5rby7QylRc6JxU5lzQ9c4tN&index=23)                  |  24.02.05  |
 
 ## 📌스프링 동작원리
 
