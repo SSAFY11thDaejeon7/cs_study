@@ -147,7 +147,7 @@ Deadlock을 **절대** 발생하지 않도록 예방하는 기법
 - 프로세스가 요구하는 자원 및 최대 수량을 알고 있음
 - 프로세스는 자원을 사용 후 반드시 반납
 
- → 비현실적
+ → **비현실적**
 
 ## Deadlock 회피 알고리즘
 
@@ -177,7 +177,7 @@ Deadlock을 **절대** 발생하지 않도록 예방하는 기법
 
 Banker’s algorithm은 한 프로세스가 자원을 요청할 때, 이를 수락한 경우를 가정해보고, 이 때 만약 Unsafe status가 될 수 있는 경우, 자원 요청을 거절함.
 
-Habermann’s algorithm
+### Habermann’s algorithm
 
 - Dijkstra’s algorithm의 확장
 - 여러 종류의 자원 고려
