@@ -10,6 +10,7 @@
     - 시스템 내에 deadlock에 빠진 프로세스가 있는 경우
         - 시스템이 deadlock 상태에 있음
 - deadlock vs starvation
+  
   ![image](https://github.com/SSAFY11thDaejeon7/cs_study/assets/68500724/1d9c33e9-6335-4565-b65d-096856899158)
 
 
@@ -153,7 +154,17 @@
   - 시스템을 항상 safe state로 유지
     - 1 resource type R, 10 resource units, 3 processes
     - Safe state example
+    
+    ![image](https://github.com/SSAFY11thDaejeon7/cs_study/assets/68500724/2d16939f-66e4-48d6-b6d6-ae94b266c672)
+    ![image](https://github.com/SSAFY11thDaejeon7/cs_study/assets/68500724/859e5c5f-3463-405d-b624-23930f675577)
+
     - Unsafe state example
+    
+    ![image](https://github.com/SSAFY11thDaejeon7/cs_study/assets/68500724/9e739817-d875-4c92-847a-9d2fe584a87d)
+    ![image](https://github.com/SSAFY11thDaejeon7/cs_study/assets/68500724/8d421def-2856-426d-9952-f3ec691db3bd)
+    ![image](https://github.com/SSAFY11thDaejeon7/cs_study/assets/68500724/68a3d7b1-f6ca-4a49-bbaf-2b91599a355e)
+    ![image](https://github.com/SSAFY11thDaejeon7/cs_study/assets/68500724/1cf90d5f-e45a-43da-9668-8df101e8bb3b)
+
 - Habermann's algorithm
   - Dijkstra's algorithm의 확장
   - 여러 종류의 자원 고려
@@ -163,6 +174,12 @@
     - 3 types of resources: Ra, Rb, Rc
     - Number of resource units for each type: (10, 5, 7)
     - 5 processes
+    
+    ![image](https://github.com/SSAFY11thDaejeon7/cs_study/assets/68500724/c00fc54b-b7f9-4a77-a3e7-76da823b577a)
+    ![image](https://github.com/SSAFY11thDaejeon7/cs_study/assets/68500724/7dc12fbc-807d-4f13-a928-1436fe092110)
+    ![image](https://github.com/SSAFY11thDaejeon7/cs_study/assets/68500724/a8b8df71-6cac-4c19-b520-5cb6dd040e49)
+    ![image](https://github.com/SSAFY11thDaejeon7/cs_study/assets/68500724/ead993d3-ba45-4fab-8d20-0110a8b70790)
+
 - Deadlock의 발생을 막을 수 있음
 - High overhead
   - 항상 시스템을 감시하고 있어야 한다
@@ -181,6 +198,13 @@
 - Resource Allocation Graph (RAG) 사용
   - Deadlock 검출을 위해 사용
   - Directed, bipartite Graph
+  
+  ![image](https://github.com/SSAFY11thDaejeon7/cs_study/assets/68500724/416face9-8851-40c5-97e2-7e5b4a139e5c)
+  ![image](https://github.com/SSAFY11thDaejeon7/cs_study/assets/68500724/565662b9-6787-48da-9692-f6354c3110d4)
+  ![image](https://github.com/SSAFY11thDaejeon7/cs_study/assets/68500724/dc1c29c9-e79c-4647-a36b-05c5cb970a26)
+  ![image](https://github.com/SSAFY11thDaejeon7/cs_study/assets/68500724/25b9c531-914f-4f77-909e-0215c848441d)
+  ![image](https://github.com/SSAFY11thDaejeon7/cs_study/assets/68500724/24e776d8-9dbd-486e-aa56-d2612b522a26)
+
   - Graph reduction
     - 주어진 RAG에서 edge를 하나씩 지워가는 방법
     - Completely reduced
@@ -191,6 +215,9 @@
       - 하나 이상의 프로세스가 deadlock 상태
     - Unblocked process
       - 필요한 자원을 모두 할당 받을 수 있는 프로세스
+
+        ![image](https://github.com/SSAFY11thDaejeon7/cs_study/assets/68500724/304a0fef-769f-4358-813e-d3e9bfd13ad6)
+
     - High overhead
       - 검사 주기에 영향을 받음
       - Node의 수가 많은 경우
@@ -207,6 +234,11 @@
         - 현재 상태에서 deadlock이 없음
       - 일부 edge가 남음
         - 현재 deadlock이 존재
+  - Graph Reduction example
+
+    ![image](https://github.com/SSAFY11thDaejeon7/cs_study/assets/68500724/22532a9a-1bf1-4c54-94bd-28881c03ec0a)
+    ![image](https://github.com/SSAFY11thDaejeon7/cs_study/assets/68500724/87bdc5c2-03ef-4d9d-a980-c36a4bc70bd2)
+
 ## Deadlock Avoidance vs Detection
 - Deadlock avoidance
   - 최악의 경우를 생각
@@ -270,3 +302,4 @@
   - 프로세스의 수행 중 특정 지점마다 context를 저장
   - Rollback을 위해 사용
     - 프로세스 강제 종료 후, 가장 최근의 checkpoint에서 재시작
+    ![image](https://github.com/SSAFY11thDaejeon7/cs_study/assets/68500724/bb8a8091-9b27-4eeb-87e5-834e0630a0ef)
