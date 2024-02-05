@@ -161,3 +161,153 @@
     - Low device utilization
     - Reduced system throughput
 - 비현실적
+
+### Deadlock Avoidance
+
+- 시스템의 상태를 계속 감시
+- 시스템이 Deadlock 상태가 될 가능성이 있는 자원 할당 요청 보류
+- 시스템을 항상 safe state로 유지
+- Safe state
+    - 모든 프로세스가 정상적 종료 가능한 상태
+    - Safe sequence가 존재
+        - Deadlock상태가 되지 않을 수 있음을 보장
+- Unsafe state
+    - Deadlock 상태가 될 가능성이 있음
+    - 반드시 발생한다는 의미는 아님
+- 가정
+    - 프로세스의 수가 고정됨
+    - 자원의 종류와 수가 고정됨
+    - 프로세스가 요구하는 자원 및 최대 수량을 알고 있음
+    - 프로세스는 자원을 사용 후 반드시 반납
+
+### Dijkstra’s banker’s algorithm
+
+- Deadlock avoidance를 위한 간단한 이론적 기법
+- 가정
+    - 한 종류의 자원(R)이 여러 개(units)
+- 시스템을 항상 safe state로 유지
+
+<img width="885" alt="image" src="https://github.com/SSAFY11thDaejeon7/cs_study/assets/81237987/dc6752f9-ee63-4790-89d8-0360222565db">
+
+- Unsafe state example
+<img width="778" alt="image" src="https://github.com/SSAFY11thDaejeon7/cs_study/assets/81237987/86dfb6ca-76fa-4880-ba0e-c3bb2bf0763c">
+
+### Habermann’s algorithm
+
+- Dijkstar’s algorithm의 확장
+- 여러 종류의 자원 고려
+    - Multiple resource types
+    - Multiple resource units for each resource type
+- 시스템을 항상 safe state로 유지
+- Example
+<img width="799" alt="image" src="https://github.com/SSAFY11thDaejeon7/cs_study/assets/81237987/6fa2725e-72f7-4a77-8064-de0100e18ef8">
+
+### Deadlock Avoidance 정리
+
+- Deadlock의 발생을 막을 수 있음
+- High overhead
+    - 항상 시스템을 감시하고 있어야 함
+- Low Resource Utilization
+    - Safe state 유지를 위해, 사용 되지 않는 자원이 존재
+- Not practical
+    - 가정
+        - 프로세스 수, 자원 수가 고정
+        - 필요한 최대 자원 수를 알고 있음
+
+### Deadlock Detection and Deadlock Recovery
+
+- Deadlock 방지를 위한 사전 작업을 하지 않음
+    - Deadlock이 발생 가능
+- 주기적으로 Deadlock 발생 확인
+    - 시스템이 Deadlock 상태인지
+    - 어떤 프로세스가 Deadlock 상태인지
+- Resource Allocation Graph(RAG) 사용
+
+### Resource Allocation Graph(RAG)
+
+- Deadlock 검출을 위해 사용
+- Directed, bipartite Graph
+- Directed graph G = (N, E)
+- Edge는 프로세스 집합과 자원 집합 사이에만 존재
+
+### Graph Reduction
+
+- 주어진 RAG에서 edge를 하나씩 지워가는 방법
+- Completely reduced
+    - 모든 edge가 제거 됨
+    - Deadlock에 빠진 프로세스가 없음
+- Irreducible
+    - 지울 수 없는 edge가 존재
+    - 하나 이상의 프로세스가 deadlock 상태
+- Unblokced process
+    - 필요한 자원을 모두 할당 받을 수 있는 프로세스
+
+<img width="833" alt="image" src="https://github.com/SSAFY11thDaejeon7/cs_study/assets/81237987/730dfa38-b8c2-40ce-a5d0-aeb0b567270e">
+
+- example 1
+<img width="811" alt="image" src="https://github.com/SSAFY11thDaejeon7/cs_study/assets/81237987/c687b945-8e81-473c-9e00-642aac5b6e91">
+
+- example2 (남은 edge가 있으므로 Deadlock 상태)
+<img width="877" alt="image" src="https://github.com/SSAFY11thDaejeon7/cs_study/assets/81237987/7ae293cf-9436-4961-8392-4f4eea35367c">
+
+### Graph Reduction 정리
+
+- High overhead
+    - 검사 주기에 영향을 받음
+    - Node의 수가 많은 경우
+
+### Deadlock Avoidance vs Detection
+
+- Deadlock avoidance
+    - 최악의 경우를 생각
+    - Deadlock이 발생 하지 않음
+- Deadlock detection
+    - 최선의 경우를 생각
+    - Deadlock 발생 시 Recovery 과정이 필요
+
+### Deadlock Recovery - Process termination
+
+- Deadlock 상태인 프로세스 중 일부 종료
+- Termination cost model
+    - 종료 시킬 Deadlock 상태의 프로세스 선택
+    - Termination cost
+        - 우선순위 / Process priority
+        - 종류 / Process type
+        - 총 수행 시간 / Accumulated excution time of the process
+        - 남은 수행 시간 / Remaining time of the process
+        - 종료 비용 / Accounting cost
+        - Etc.
+- Lowest-termination cost process first
+    - 단순함
+    - 낮은 오버헤드
+    - 불필요한 프로세스들이 종료 될 가능성이 높음
+- Minimum cost recovery
+    - 최소 비용으로 Deadklock 상태를 해소 할 수 있는 process 선택
+    - 모든 경우의 수를 고려해야 함으로 복잡하고 오버헤드가 큼
+    
+
+### Deadlock Recovery - Resource preemption
+
+- Deadlock 상태 해결을 위해 선점할 자원 선택
+- 해당 자원을 가지고 있는 프로세스를 종료 시킴
+    - Deadlock 상태가 아닌 프로세스가 종료 될 수도 있음
+    - 해당 프로세스는 이후 재시작 됨
+- 선점할 자원 선택
+    - Preemption cost model이 필요
+    - Minimum cost recovery method 사용
+
+### Deadlock Recovery
+
+- Deadlock을 검출 한 후 해결하는 과정
+- Deadlock recovery methods
+    - Process termination
+        - Deadlock 상태에 있는 프로세스를 종료 시킴
+        - 강제 종료된 프로세스는 이후 재시작
+    - Resource preemption
+        - Deadlock 상태 해결 위해 선점할 자원 선택
+        - 선정된 자원을 가지고 있는 프로세스에서 자원을 빼앗음
+        - 자원을 빼앗긴 프로세스는 강제 종료됨
+- Checkpoint-restart method
+    - 프로세스의 수행 중 특정 지점마다 context를 저장
+    - Rollback을 위해 사용
+        - 프로세스 강제 종료 후, 가장 최근의 checkpoint에서 재시작
