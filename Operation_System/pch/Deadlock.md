@@ -140,12 +140,18 @@
 
 ![image](https://github.com/SSAFY11thDaejeon7/cs_study/assets/91451735/fb98932c-3141-47cf-9978-8fa76482aaf1)
 
+![image](https://github.com/SSAFY11thDaejeon7/cs_study/assets/91451735/29e63c8c-7b69-428d-9699-31738effbaa4)
+
+ - P3만 unblocked process고 나머지 프로세스들은 blocked process이다.
+
 - RAG 동작과정
   - 1) Unblocked process에 연결 된 모든 edge를 제거한다.
   - 2) 더 이상 Unblocked process가 없을 때까지 1번을 반복한다.
 
 - 위 결과 최종 그래프에서 모든 edge가 제거되면 deadlock이 없는 상태이고, edge가 남으면 deadlock이 존재하는 상태이다.
 <br>
+
+- 단점 : 검사 주기가 짧고 Node 수가 많은 경우 overhead가 크다.
 
 - 중요 용어
 1. Graph reduction
@@ -158,3 +164,25 @@
    - 하나 이상의 프로세스가 deadlock 상태
 4. Unblocked process
    - 필요한 자원을 모두 할당 받을 수 있는 상태 ( 요청 < 남은 수 )
+
+## Deadlock Avoidance vs Detection
+- Deadlock avoidance와 같은 경우 앞으로 일어날 최악의 일을 고려해, 시스템이 deadlock 상태가 될 가능성이 있는 자원에는 할당 요청을 보류하며 safe state를 항상 유지시키기 때문에 Deadlock이 발생하지 않는다.
+- 반면 Deadlock Detectino은 safe state를 유지하려고 하지 않고, 현재 상태를 감지하다가 Deadlock  발생 시 Recovery 과정을 수행한다는 차이점이 있다.
+<br>
+
+## Deadlock Recovery
+- Deadlock을 검출 한 후 해결하는 과정
+- 교착상태 회복 방법
+1. Process termination
+   - Deadlock 상태에 있는 프로세스를 종료시킨다.
+   - 강제 종료된 프로세스는 이후 재시작된다.
+2. Resource preemption
+   - Deadlock 상태 해결을 위해 선점할 자원을 선택
+   - 선정 된 자원을 가지고 있는 프로세스에서 자원을 빼앗음
+     - 자원을 빼앗긴 프로세스는 강제 종료됨
+     - Deadlock 상태가 아닌 프로세스가 종료될 수도 있음
+3. CheckPoint-restart method
+   - 프로세스의 수행 중 특정 지점(checkpoint)마다 context를 저장한다
+   - Rollback을 사용하여 프로세스 강제 종료 후, 가장 최근의 checkpoint에서 재시작한다.
+![image](https://github.com/SSAFY11thDaejeon7/cs_study/assets/91451735/ab702192-6f2e-418f-8e3e-119b990ec5e1)
+
