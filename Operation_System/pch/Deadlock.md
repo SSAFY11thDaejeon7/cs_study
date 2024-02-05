@@ -69,6 +69,7 @@
 - Deadlock detection and deadlock recovery mothods : 교착상태 탐지 및 복구
 <br>
 
+## 교착상태 예방
 1. 모든 자원을 공유 허용
   - Exclusive use of resoureces 조건 제거
   - 현실적으로 불가능
@@ -93,3 +94,67 @@
 <br>
 
 - 위의 4가지 방법들은 모두 Deadlock을 발생시키지 않도록 해주나, 심각한 자원 낭비가 발생하며 비현실적이다.
+
+## 교착상태 회피
+- 시스템의 상태를 계속 감시
+- 시스템이 deadlock 상태가 될 가능성이 있는 자원 할당 요청 보류
+- 시스템을 항상 safe state로 유지
+<br>
+
+- 가정
+  - 프로세스의 수가 고정됨
+  - 자원의 종류와 수가 고정됨
+  - 프로세스가 요구하는 자원 및 최대 수량을 알고 있음
+  - 프로세스는 자원을 사용 후 반드시 반납함
+<br>
+
+- 중요 용어
+1. Safe state
+   - 모든 프로세스가 정상적 종료가 가능한 상태
+   - Safe sequence가 존재하여 Deadlock 상태가 되지 않음을 보장함
+2. Unsafe state
+   - Deadlock 상태가 될 가능성이 있음
+   - 반드시 발생한다는 의미는 아님
+<br>
+
+- Dijkstra's banker's algorithm
+  - Deadlock avoidance algorithm
+  - 한 종류의 자원이 여러개있다는 가정에 시스템을 항상 safe state로 유지한다.
+  
+![image](https://github.com/SSAFY11thDaejeon7/cs_study/assets/91451735/ec56b495-7031-405a-8967-57470b9f9ab4)
+
+![image](https://github.com/SSAFY11thDaejeon7/cs_study/assets/91451735/fc76b8c2-5d3a-41ba-912d-191830054948)
+
+- 장점
+  - Daedlock 발생을 막을 수 있다.
+- 단점
+  - High overhead : 항상 시스템을 감시하고 있어야 한다.
+  - Low resource utilization : Safe state 유지를 위해 사용되지 않는 자원이 존재
+  - 프로세스 수, 자원 수가 고정적이며 필요한 최대 자원 수를 알고 있어야 하는등 현실적이지 않음
+<br>
+
+## 교착상태 탐지(Deadlock Detection)
+- 주기적으로 시스템이 deadlock 상태인지 확인함
+- 주로 Resource Allocation Graph (RAG) 기법을 사용하여 확인함
+![image](https://github.com/SSAFY11thDaejeon7/cs_study/assets/91451735/a6137da9-d94e-4c75-b3b8-2c29effb55c8)
+
+![image](https://github.com/SSAFY11thDaejeon7/cs_study/assets/91451735/fb98932c-3141-47cf-9978-8fa76482aaf1)
+
+- RAG 동작과정
+  - 1) Unblocked process에 연결 된 모든 edge를 제거한다.
+  - 2) 더 이상 Unblocked process가 없을 때까지 1번을 반복한다.
+
+- 위 결과 최종 그래프에서 모든 edge가 제거되면 deadlock이 없는 상태이고, edge가 남으면 deadlock이 존재하는 상태이다.
+<br>
+
+- 중요 용어
+1. Graph reduction
+   - 주어진 RAG에서 edge를 하나씩 지워가는 방법
+2. Completely reduced
+   - 모든 edge가 제거됨
+   - Deadlock에 빠진 프로세스가 없음
+3. Irreducible
+   - 지울 수 없는 edge가 존재
+   - 하나 이상의 프로세스가 deadlock 상태
+4. Unblocked process
+   - 필요한 자원을 모두 할당 받을 수 있는 상태 ( 요청 < 남은 수 )
