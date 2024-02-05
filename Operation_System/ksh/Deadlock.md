@@ -124,3 +124,124 @@
 
 - 4가지 예방 방법 모두 심각한 자원 낭비가 발생하고 비현실적임.
 
+### Deadlock Avoidance (교착 상태 회피)
+- 시스템의 상태를 계속 감시
+- 시스템이 교착 상태가 될 가능성이 있는 자원 할당 요청 보류
+- 시스템을 항상 **safe state**로 유지
+
+- Safe state
+  - 모든 프로세스가 정상적인 종료가 가능한 상태
+  - Safe sequence가 존재: Deadlock 상태가 되지 않을 수 있음을 보장
+- Unsafe state
+  - Deadlock 상태가 될 가능성이 있음
+  - 반드시 발생한다는 의미는 아님
+ 
+- 가정
+  - 프로세스의 수가 고정됨
+  - 자원의 종류와 수가 고정됨
+  - 프로세스가 요구하는 자원 및 최대 수량을 알고 있음
+  - 프로세스는 자원을 사용 후 반드시 반납한다
+  -> 비현실적임
+
+- 다익스트라의 banker's algorithm
+  - Deadlock avoidance를 위한 간단한 이론적 기법
+  - 가정: 한 종류의 자원이 여러개
+  - 시스템을 항상 safe state로 유지
+
+![10일차-1](https://github.com/SSAFY11thDaejeon7/cs_study/assets/80624927/eb85c1c5-1d90-463e-b01b-2168984fc334)
+
+- Max. Claim: 최대 필요수, Cur. Alloc.: 현재 할당 수, Additional Need: 요구 할당 수(반드시 필요x)
+- 돈을 빌려주고 무조건 갚는다고 할 때, 누구한테 먼저 돈을 빌려줄까?
+- Available resource units: 2
+- 실행 종료 순서: P1 -> P3 -> P2 (Safe sequence)
+- 현재 상태에서 안전 순서가 하나 이상 존재하면 Safe state임
+
+![10일차-2](https://github.com/SSAFY11thDaejeon7/cs_study/assets/80624927/cfff6a3f-0ea1-4014-b201-43cafa377223)
+
+- 위의 경우 safe sequence가 없으므로 Unsafe state
+- 결과적으로 자원을 줬다고 가정해보고 safe sequnece가 없으면 요청을 거절함
+
+- Habermann's algorithm
+  - 다익스트라 알고리즘의 확장
+  - 여러 종류의 자원 고려
+  - 시스템을 항상 Safe state로 유지
+
+> 결론
+- Deadlock의 발생을 막을 수 있음
+- High overhead
+  - 항상 시스템을 감시하고 있어야 한다
+- Low resource utilization
+  - Safe state 유지를 위해, 사용되지않는 자원이 존재
+- Not practical
+
+### Deadlock detection and recovery methods (교착상태 탐지 및 복구)
+- Deadlock 방지를 위한 사전 작업을 하지 않음
+  - Deadlock이 발생 가능
+- 주기적으로 deadlock 발생 확인
+  - 시스템이 deadlock 상태인가?
+  - 어떤 프로세스가 deadlock 상태인가?
+- Resource Allocation Graph (RAG) 사용
+
+- Resource Allocation Graph (RAG)
+  - Deadlock 검출을 위해 사용
+  - Directed, bipartite Graph(두개의 파트로 나누는 그래프)
+ 
+- G = (N, E) : 그래프는 노드와 엣지로 이루어져있음
+- 노드는 프로세스들과 리소스들로 나누어져있음
+- 프로세서 -> 리소스(자원 요청) 또는 리소스 -> 프로세스(자원 할당) 방향의 엣지만 가능
+
+- Graph reduction
+  - 주어진 RAG에서 edge를 하나씩 지워가는 방법 -> Deadlock인지 아닌지 판단 가능
+  - Completely reduced
+    - 모든 edge가 제거됨
+    - 교착상태에 빠진 프로세스가 없음
+  - Irreducible
+    - 지울수 없는 edge가 존재
+    - 하나 이상의 프로세스가 교착상태
+   
+- Unblocked process에 연결된 edge를 지우기
+  - 필요한 자원을 모두 할당받을 수 있는 프로세스
+
+- Graph reduction procedure
+1. Unblocked process에 연결된 모든 edge를 제거
+2. 더이상 unblocked process가 없을 때까지 1 반복
+- 최종 그래프에서
+  - 모든 edge가 제거됨: 현재 상태에서 deadlock이 없음
+- 일부 edge가 남음: 현재 상태에서 deadlock이 존재함
+
+- High overhead
+  - 검사 주기에 영향을 받음
+  - Node의 수가 많은 경우
+
+### 교착 상태 회피 vs 탐지
+- 교착 상태 회피
+  - 최악의 경우를 생각
+  - Deadlock이 발생하지 않음
+- 교착 상태 탐지
+  - 최선의 경우를 생각
+  - Deadlock 발생 시 Recovery 과정이 필요
+
+### Deadlock Recovery
+- Process termination
+  - Deadlock 상태인 프로세스중 일부 종료
+  - 어떤 프로세스를 종료시킬지 정하는 것은 cost model을 통해 정함
+  - cost model은 우선순위, 종류, 총 수행시간, 남은 수행시간, 종료 비용등을 고려함
+ 
+- 종료 비용이 가장 적은 프로세스 우선하는 경우
+  - 단순하고 overhead가 적음
+  - 불필요한 프로세스들이 종료될 가능성이 높음
+- 비용을 최적화하는 최선의 선택을 하는 경우
+  - 최소 비용으로 deadlock 상태를 해소할 수 있는 프로세스 선택
+    - 모든 경우의 수를 고려해야 함
+  - 복잡하고 overhead가 큼
+  
+- 자원을 선점하는 경우 (Resource preemption)
+  - Deadlock 상태 해결을 위해 선점할 자원 선택
+  - 해당 자원을 가지고 있는 프로세스를 종료시킴
+    - Deadlock 상태가 아닌 프로세스가 종료될 수도 있음
+    - 해당 프로세스는 이후 재시작됨
+
+- Checkpoint-restart method
+  - 프로세스의 수행 중 특정 지점마다 context를 저장
+  - Rollback을 위해 사용
+    - 프로세스 강제 종료 후, 가장 최근의 checkpoint에서 재시작
