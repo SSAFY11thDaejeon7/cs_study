@@ -58,6 +58,9 @@
 |     | [[OS] Lec 7. Deadlock (3/5) - Deadlock and Resource types](https://www.youtube.com/watch?v=XMrlt3ZwfM4&list=PLBrGAFAIyf5rby7QylRc6JxU5lzQ9c4tN&index=21)                  |  24.02.02  |
 | 4주차| [[OS] Lec 7. Deadlock (4/5) - Deadlock and Resource types](https://www.youtube.com/watch?v=qmtOsmixfsA&list=PLBrGAFAIyf5rby7QylRc6JxU5lzQ9c4tN&index=22)                  |  24.02.05  |
 |     | [[OS] Lec 7. Deadlock (5/5) - Deadlock and Resource types](https://www.youtube.com/watch?v=8XbSgZ2JPQ8&list=PLBrGAFAIyf5rby7QylRc6JxU5lzQ9c4tN&index=23)                  |  24.02.05  |
+|     | [[OS] Lec 8. Memory Management (1/3) - Backgrounds](https://www.youtube.com/watch?v=es3WGii_7mc&list=PLBrGAFAIyf5rby7QylRc6JxU5lzQ9c4tN&index=24)                  |  24.02.07  |
+|     | [[OS] Lec 8. Memory Management (2/3) - Fixed Partition Multiprogramming](https://www.youtube.com/watch?v=te-GU7NKa5Y&list=PLBrGAFAIyf5rby7QylRc6JxU5lzQ9c4tN&index=25)                  |  24.02.07  |
+|     | [[OS] Lec 8. Memory Management (3/3) - Variable Partition Multi-programming](https://www.youtube.com/watch?v=o1TB9NWvG9w&list=PLBrGAFAIyf5rby7QylRc6JxU5lzQ9c4tN&index=26)                  |  24.02.07  |
 
 ## 📌스프링 동작원리
 
