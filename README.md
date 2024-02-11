@@ -61,6 +61,11 @@
 |     | [[OS] Lec 8. Memory Management (1/3) - Backgrounds](https://www.youtube.com/watch?v=es3WGii_7mc&list=PLBrGAFAIyf5rby7QylRc6JxU5lzQ9c4tN&index=24)                  |  24.02.07  |
 |     | [[OS] Lec 8. Memory Management (2/3) - Fixed Partition Multiprogramming](https://www.youtube.com/watch?v=te-GU7NKa5Y&list=PLBrGAFAIyf5rby7QylRc6JxU5lzQ9c4tN&index=25)                  |  24.02.07  |
 |     | [[OS] Lec 8. Memory Management (3/3) - Variable Partition Multi-programming](https://www.youtube.com/watch?v=o1TB9NWvG9w&list=PLBrGAFAIyf5rby7QylRc6JxU5lzQ9c4tN&index=26)                  |  24.02.07  |
+| 5주차| [[OS] Lec 9. Virtual Memory (1/5) - Non-continuous allocation](https://www.youtube.com/watch?v=YCfP9I4K-8Y&list=PLBrGAFAIyf5rby7QylRc6JxU5lzQ9c4tN&index=27)                  |  24.02.12  |
+|     | [[OS] Lec 9. Virtual Memory (2/5) - Paging system](https://www.youtube.com/watch?v=mTFYeZwPj0s&list=PLBrGAFAIyf5rby7QylRc6JxU5lzQ9c4tN&index=28)                  |  24.02.12  |
+|     | [[OS] Lec 9. Virtual Memory (3/5) - Paging system](https://www.youtube.com/watch?v=B_QLTChsi04&list=PLBrGAFAIyf5rby7QylRc6JxU5lzQ9c4tN&index=29)                  |  24.02.12  |
+|     | [[OS] Lec 9. Virtual Memory (4/5) - Segmentation System](https://www.youtube.com/watch?v=Dprd7V842WY&list=PLBrGAFAIyf5rby7QylRc6JxU5lzQ9c4tN&index=30)                  |  24.02.14  |
+|     | [[OS] Lec 9. Virtual Memory (5/5) - Hybrid Paging-Segmentation System](https://www.youtube.com/watch?v=ctfTntZ-RBo&list=PLBrGAFAIyf5rby7QylRc6JxU5lzQ9c4tN&index=31)                  |  24.02.14  |
 
 ## 📌스프링 동작원리
 
