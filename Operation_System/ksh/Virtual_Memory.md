@@ -113,3 +113,68 @@
 
 ## Page Protection
 - 여러 프로세스가 page를 공유할 때, Protection bit 사용
+
+## Segmentation System
+- **프로그램을 논리적 block으로 분할(segment)**
+  - Block의 크기가 서로 다를 수 있음
+- 특징
+  - 메모리를 미리 분할하지 않음. 동적으로 분할함 -> VPM과 유사
+  - Segment sharing/protection이 용이함
+  - 주소 매핑 및 메모리 관리의 overhead가 큼
+  - 내부 단편화가 일어나지 않음
+  - 외부 단편화 발생 가능성이 있음
+
+- Address mapping
+  - Segment Map Table(SMT)
+  - Paging system과 기법이 유사함
+- Segment Map Table
+
+![13일차-1](https://github.com/SSAFY11thDaejeon7/cs_study/assets/80624927/05743afb-3804-4514-9edd-4a183f7c5395)
+
+- segment length를 통해 segment들의 길이를 관리할 수 있다
+- protection bit를 통해 segment에 대한 접근 권한을 관리할 수 있다
+
+![13일차-2](https://github.com/SSAFY11thDaejeon7/cs_study/assets/80624927/20eda911-f5f2-4560-999a-47d8544c5338)
+
+- 과정
+1. 프로세스의 SMT가 저장되어있는 주소 b에 접근
+2. SMT에서 segment s의 entry를 찾음
+3. 찾아진 Entry에 대해 다음 단계들을 순차적으로 실행
+   - 존재 비트가 0인 경우, swap device로부터 해당 segment를 메모리로 적재
+   - 변위(d)가 segment 길이보다 큰 경우, segment overflow exception 처리 모듈을 호출
+   - 허가되지 않은 연산일 경우 segment protection exception 처리 모듈을 호출
+4. 실제 주소 r 계산
+5. r로 메모리에 접근
+
+- Memory Management
+  - VPM과 유사함. Segment 적재 시, 크기에 맞추어 분할 후 메모리에 적재함
+- Segment sharing/protection
+  - 논리적으로 분할되어있어서 공유 및 보호가 용이함
+- Segment mapping overhead
+  - 메모리 공간 및 추가적인 메모리 접근이 필요함
+  - 전용 HW 활용으로 해결 가능함
+
+## Hybrid Paging/Segmentation
+- Paging과 Segmentation의 장점 결합
+- 프로그램 분할
+  - 논리 단위의 segment로 분할
+  - 각 segment를 고정된 크기의 page들로 분할
+- Page단위로 메모리에 적재
+
+- Address mapping
+  - SMT와 PMT 모두 사용
+    - 각 프로세스마다 하나의 SMT
+    - 각 segment마다 하나의 PMT
+    - Direct, associated등
+    - 메모리 관리: FPN과 유사함
+   
+- SMT에 residence bit가 존재하지 않고(메모리에 올라가는 것은 page라서), PMT address가 존재함
+
+![13일차-3](https://github.com/SSAFY11thDaejeon7/cs_study/assets/80624927/f62726db-b579-483d-abf0-6c5e7dd26f98)
+
+- Page sharing/protection이 쉬움
+- 메모리 할당/관리 overhead가 작음
+- 외부 단편화가 일어나지 않고, 내부 단편화 발생 가능성은 있음
+
+- 전체 테이블 수가 증가해서 메모리 소모가 크고, 주소 매핑 과정이 복잡함
+- Direct mapping의 경우, 메모리 접근이 3배 늘어나서 성능이 저하될 수 있음
