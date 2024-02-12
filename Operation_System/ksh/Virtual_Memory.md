@@ -31,7 +31,7 @@
 3. Resudence bit 검사
    - Residence bit = 0인 경우, swap device에서 해당 블록을 메모리로 가져옴
    - Residence bit = 1인 경우, BMT에서 b에 대한 real address값 a 확인
-4. 실제 주소 r 계싼 (r = a + d)
+4. 실제 주소 r 계산 (r = a + d)
 5. r을 이용하여 메모리에 접근
 
 ## Paging System
@@ -55,7 +55,7 @@
 
 ![12일차-3](https://github.com/SSAFY11thDaejeon7/cs_study/assets/80624927/111f0a86-f8b4-42a2-98f0-425178a5e63b)
 
-1. 해당 프로세스의 PMR가 저장되어 있는 주소 b에 접근
+1. 해당 프로세스의 PMT가 저장되어 있는 주소 b에 접근
 2. 해당 PMT에서 page p에 대한 entry 찾음
 3. 찾아진 entry의 존재 비트 검사
 - Residence bit = 0인 경우 **(page fault)** , swap device에서 해당 page를 메모리로 적재
