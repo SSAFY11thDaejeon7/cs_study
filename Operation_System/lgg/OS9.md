@@ -160,3 +160,125 @@ main memory 에서 같은 주소인데 여러 프로세스가 공유하다보니
 공유 data page에서 문제점 발생
 
 read,write할 때 문제점 발생 → protection bit 사용
+
+
+
+
+**Segmentation System**
+
+프로그램을 **논리적 block** 으로 분할
+
+page system과 달리 block 크기가 달라질 수 있다.
+
+**특징**
+
+메모리를 미리 분할해놓지 않는다. (VPM과 유사)
+논리적인 block이기에 segment sharing/protection이 용이함.
+
+하지만 그만큼 address mapping 및 메모리 관리의 overhead가 큼.
+
+No internal fragmentation(짤라서 주기 때문에)
+
+yes external fragmentation
+
+**Address Mapping (paging system과 유사)**
+
+virtual address : v = (s, d)
+
+s : segment number
+
+d : displacement(offset) in a segment
+
+SMT(segment map table)
+
+![image](https://github.com/SSAFY11thDaejeon7/cs_study/assets/138864974/c595e5b9-6eb4-45db-8648-b58c5733a6ac)
+
+segment length : segment는 길이가 가변이므로 length 정보 추가
+
+protection bits : segment를 보호하기 위함.
+
+**Direct Mapping**
+
+![image](https://github.com/SSAFY11thDaejeon7/cs_study/assets/138864974/ecd1df6e-af63-49f7-bb5b-0cbd9cbbe820)
+
+1. residence bit 0인 경우 : segmentation fault. swap device로부터 segment 메모리 적재, SMT update
+2. 변위 d가 ls (segment length)보다 큰 경우, segment overflow exception 처리
+3. 허가되지 않은 연산(protection bit확인)일 경우, segment protection exception 처리
+
+**segment sharing / protection**
+
+논리적으로 분할되어 있으므로, 공유 및 보호가 용이하다.
+
+**segmentation 장점**
+
+프로그램을 논리 단위로 분할, 메모리를 동적으로 분할하기 때문에
+
+internal fragmentation 없다.
+
+segment sharing / protection 용이하다.
+
+**segmentation 단점**
+
+paging system 대비 overhead가 크다.
+
+paging과 유사하게 SMT 메모리 공간과 추가적인 메모리 접근이 필요하다. → TLB같은 HW로 개선
+
+**Hybrid paging / segmentation system**
+
+paging, segmentation 장점 결합
+
+프로그램 분할 : 논리적인 단위 segment로 분할
+
+메모리 적재 : 각 segment를 고정된 크기의 page로 분할해서 메모리에 적재함.
+
+**Address mapping**
+
+virtual address : v = (s, p, d)
+
+s : segment number
+
+p : page number
+
+d : offset in a page
+
+SMT, PMT 둘다 사용
+
+각 프로세스마다 하나의 SMT
+
+각 segment마다 하나의 PMT
+
+**SMT**
+
+![image](https://github.com/SSAFY11thDaejeon7/cs_study/assets/138864974/8f5ead88-2fe0-459a-9be1-4955a468790d)
+
+hybrid SMT에는 residence bit가 없다. → 실제 메모리에 올라가는 것은 page단위이기 때문에 SMT에는 residence bit가 없음.
+
+**PMT**
+
+![image](https://github.com/SSAFY11thDaejeon7/cs_study/assets/138864974/5b9fc6ee-09b4-4fac-83bc-b55f481f02d0)
+
+PMT는 residence bit 존재
+
+![image](https://github.com/SSAFY11thDaejeon7/cs_study/assets/138864974/75887cf5-a92c-4d73-8ee1-ad3567d0329e)
+
+![image](https://github.com/SSAFY11thDaejeon7/cs_study/assets/138864974/ecc8e95a-4cc5-4923-8800-25a723c993b7)
+
+메모리 3번을 접근하게 되지만, 그만큼 장점이 더 많기 때문에 사용한다.
+
+**hybrid paging / segmentation 장점**
+
+논리적 분할 segment 와 고정크기 분할 paging 결합
+
+page sharing, protection 용이함.(segmentation)
+
+메모리 관리,할당 overhead 작다.(paging)
+
+no external fragmentation, yes internal fragmentation(paging)
+
+**hybrid paging / segmentation 단점**
+
+메모리 소모가 크다.
+
+address mapping 과정이 복잡하다.
+
+direct mapping의 경우 위 그림같이 메모리 접근 3번하게 된다.
