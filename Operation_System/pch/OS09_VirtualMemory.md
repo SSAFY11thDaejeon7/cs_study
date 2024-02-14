@@ -171,3 +171,68 @@
   - 메모리 공간 및 추가적인 메모리 접근이 필요
   - 전용 HW 활용으로 해결 가능
      - 하드웨어 비용 증가
+
+## Segmentation System
+- 프로그램을 논리적 block으로 분할
+  - Block의 크기가 서로 다를 수 있음
+- 특징
+  - 메모리를 미리 분할하지 않음
+  - 논리적으로 segment를 나누었기 때문에 Segment sharing/protection이 용이함
+  - 메모리 관리 overhead가 큼
+  - 내부 단편화 발생x, 외부 단편화는 발생 가능
+ ![image](https://github.com/SSAFY11thDaejeon7/cs_study/assets/91451735/a1d027da-65b9-4c2b-800c-bad469a0d332)
+<br>
+
+## Segmetation system Address mapping
+![image](https://github.com/SSAFY11thDaejeon7/cs_study/assets/91451735/5b9539d1-8553-4a09-a735-1ef2fef6d442)
+- 프로세스의 SMT가 저장되어 있는 주소 b에 접근
+- SMT에서 segment s의 entity를 찾음 ( s entity = b + s * entrySize )
+- 찾아진 ENtry에 대해 다음 단계 수행
+  - 존재 비트가 0인 경우 : swap device로부터 해당 segment를 메모리로 적재, SMT 갱신
+  - 변위(d)가 segment 길이보다 큰 경우 segment overflow exception 호출
+  - 허가되지 않은 연산일 경우 segment  protection exception 호출
+- 실제 주소 r 계산(r = a +d)
+- r로 메모리에 접근
+<br>
+
+## Segment sharing/protection
+- 논리적으로 분할되어 있어, 공유 및 보호가 용이함
+![image](https://github.com/SSAFY11thDaejeon7/cs_study/assets/91451735/c9bea866-21fb-49a9-b938-223f3f713a3c)
+
+## Segmentation System summary
+- 프로그램을 논리 단위로 분할/ 메모리를 동적으로 분할
+  - 내부 단편화 문제 없음
+  - Segment sharing/protection이 용이함
+  - Paging system 대비 관리 overhead가 큼
+- 필요한 segmentㅁㄴ 메모리에 적재하여 사용
+- Segment mapping overhead
+  - 메모리 공강 및 추가적인 메모리 접근이 필요
+  - 전용 HW 활용으로 해결 가능
+ 
+## Paging vs Segmentation
+1. Paging system
+   - 간단하고 적은 overhead
+   - 논리적이지 않은 분할로 페이지를 공유하고 보호하는 과정이 복잡하다
+2. Segmentation system
+   - 높은 관리 overhead
+   - 논리적인 분할로 페이지를 공유하고 보호하는 과정이 간단하다.
+  
+## Hybrid Paging/Segmentation
+- Paging과 Segmentation의 장점 결합
+- 프로그램 분할
+  - 논리 단위의 segment로 분할
+  - 각 segment를 고정된 크기의 page들로 분할
+- Page 단위로 메모리에 적재
+- SMT와 PMT 모두 사용
+![image](https://github.com/SSAFY11thDaejeon7/cs_study/assets/91451735/e6eddb8d-1c1e-45b6-af0b-b5eb2640bf1c)
+
+- Summary
+  - 논리적 분할(segment)와 고정 크기 분할(page)을 결합
+    - page sharing/protection이 쉬움
+    - 메모리 할당/관리 overhead가 적음
+    - 외부 단편화 x, 내부 단편화 가능
+  - 전체 테이블 수 증가
+    - 메모리 소모 큼
+    - Address mapping과정 복잡
+  - Direct mapping의 경우 메모리 접근 3배
+    - 성능 저하될 수 있음
