@@ -206,3 +206,96 @@
     - 메모리 공간 및 추가적인 메모리 접근이 필요
     - 전용 HW 활용으로 해결 가능
         - 하드웨어 비용 증가
+
+## Segmentation System
+
+- 프로그램을 논리적 block으로 분할(segment)
+    - Block의 크기가 서로 다를 수 있음
+    - ex) stack, heap, main procedure…
+- 특징
+- 메모리를 미리 분할 하지 않음
+- Segment sharing/protection이 용이함
+- Address mapping 및 메모리 관리의 overhead가 큼
+- 내부 단편화 발생x
+    - 외부 단편화 발생 가능
+
+![image](https://github.com/SSAFY11thDaejeon7/cs_study/assets/90568693/7264bc1c-0483-441c-8e50-d2cb1d38ec2d)
+
+
+- Address mapping
+    - Virtual address: v = (s, d)
+        - s: segment number
+        - d: displacement in a segment
+    - Segment Map Table(SMT)
+    - Address mapping mechanism
+        - Paging system과 유사
+- 과정
+    
+   ![image](https://github.com/SSAFY11thDaejeon7/cs_study/assets/90568693/aa5cbfb2-e64d-4a25-b89c-228ba861b4f4)
+
+    
+    1. 프로세스의 SMT가 저장되어 있는 주소 b에 접근
+    2. SMT에서 segment s의 entry를 찾음
+        1. s의 entry 위치 = b + s * entrySize
+    3. 찾아진 entry에 대해 아래 과정 수행
+        1. 존재 비트가 0인 경우(segment fault),
+        swap device로부터 해당 segment를 메모리로 적재, SMT 갱신
+        2. 변위(d)가 segment 길이보다 큰 경우,
+        segment overflow exception 처리 모듈 호출
+        3. 허가되지 않은 연산일 경우,
+        segment protection exception 처리 모듈 호출
+    4. 실제 주소 r 계산(r = a + d_
+    5. r로 메모리에 접근
+- Memory management
+    - VPM과 유사, segment 적재 시, 크기에 맞추어 분할 후 적재
+- Segment sharing/protection
+    - 논리적으로 분할되어 있어, 공유 및 보호가 용이
+
+## Segmentation System 요약
+
+- 프로그램을 논리 단위로 분할(segment), 메모리를 동적으로 분할
+    - 내부 단편화 문제 x
+    - segment sharing/protection이 용이
+    - Paging system 대비 관리 overhead가 큼
+- 필요한 segment만 메모리에 적재하여 사용
+- segment mapping overhead
+    - 메모리 공간 및 추가적인 메모리 접근이 필요
+    - 전용 HW 활용으로 해결 가능
+    
+
+## Hybrid paging/segmentation system
+
+- Paging과 Segmentation의 장점 결합
+- 프로그램 분할
+    - 논리 단위의 segment로 분할
+    - 각 segment를 고정된 크기의 page들로 분할
+- Page 단위로 메모리에 적재
+- 
+
+![image](https://github.com/SSAFY11thDaejeon7/cs_study/assets/90568693/077468b7-1853-42ae-9fa9-6dbf1b3cebed)
+
+
+- Address mapping
+    - Virtual address: v = (s, pd)
+        - s: segment number
+        - p: page number
+        - d: offset in a page
+    - SMT와 PMT 모두 사용
+    - Address mapping
+        - Direct, associated 등
+    - 메모리 관리: FPM과 유사
+- Direct(address) mapping
+
+![image](https://github.com/SSAFY11thDaejeon7/cs_study/assets/90568693/d23803ca-2785-4f44-bc5d-2d24f1e8f2b2)
+
+
+- 요약
+    - 논리적 분할(segment)와 고정 크기 분할(page)을 결합
+        - Page sharing/protection이 쉬움
+        - 메모리 할당/관리 overhead가 작음
+        - No external fragmentation
+    - 전체 테이블의 수 증가
+        - 메모리 소모가 큼
+        - Address mapping 과정이 복잡
+    - Direct mapping의 경우, 메모리 접근이 3배
+        - 성능이 저하될 수 있음
