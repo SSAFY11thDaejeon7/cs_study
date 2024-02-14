@@ -172,3 +172,67 @@
 ### Page Protection
 
 - 여러 프로세스가 page를 공유 할 때, Protection bit를 사용한다.
+
+# 4. Segmentation System
+
+### Segmentation System
+
+- 프로그램을 **논리적 block**으로 분할 (segment)
+- Block의 크기가 서로 다를 수 있음 (stack, heap, main procedure, shared lib, Etc)
+- 특징
+    - **메모리를 미리 분할하지 않음** (VPM과 유사)
+    - Segment sharing / protection이 용이함
+    - Address mapping 및 메모리 관리의 overhead가 큼
+    - No internal fragmentation
+        - External fragmentation 발생 가능
+    
+    <img width="490" alt="segmentationsystem" src="https://github.com/SSAFY11thDaejeon7/cs_study/assets/110437548/62443c82-5084-4a9c-b547-1ae644e1050e">
+
+
+### Address Mapping (Virtual Address → Real Address)
+
+- Virtual address: v = (s, d)
+    - s: segment number
+    - d: displacement in a segment
+- Segment Map Table (SMT)
+- Address Mapping Mechanism
+    - Paging System과 유사
+
+### Memory Management
+
+- VPM과 유사
+- Segment 적재 시, 크기에 맞추어 분할 후 적재한다.
+<img width="533" alt="pagingvssegmentation" src="https://github.com/SSAFY11thDaejeon7/cs_study/assets/110437548/7778fe4b-0391-4582-ba35-f17480da02e0">
+
+
+# 5. Hybrid Paging/ Segmentation System
+
+- Paging과 Segmentation의 장점 결합
+- 프로그램 분할
+    - 논리 단위의 segment로 분할
+    - 각 segment를 고정된 크기의 page들로 분할
+- Page 단위로 메모리에 적재한다.
+
+### Address mapping
+
+- Virtual Address: v = (s, p, d)
+    - s: segment number
+    - p: page number
+    - d: offset in a page
+- SMT와 PMT 모두 사용
+    - 프로세스 마다 하나의 SMT
+    - 각 Segment마다 하나의 PMT
+- Address mapping: Direct, associated 등
+- 메모리 관리: FPM과 유사
+
+### Summary
+
+- 논리적 분할와 고정 크기 분할을 결합
+    - Page Sharing/ protection이 쉬움
+    - 메모리 할당 및 관리의 overhead가 작음
+    - No external Fragmentation (내부 단편화만 발생)
+- 전체 테이블 수가 증가한다
+    - 메모리의 소모가 크다
+    - Address mapping 과정이 복잡하다.
+- Direct mapping의 경우, 메모리 접근이 3배
+    - 성능이 저하될 수 있다.
