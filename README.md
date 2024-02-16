@@ -66,8 +66,8 @@
 |     | [[OS] Lec 9. Virtual Memory (3/5) - Paging system](https://www.youtube.com/watch?v=B_QLTChsi04&list=PLBrGAFAIyf5rby7QylRc6JxU5lzQ9c4tN&index=29)                  |  24.02.12  |
 |     | [[OS] Lec 9. Virtual Memory (4/5) - Segmentation System](https://www.youtube.com/watch?v=Dprd7V842WY&list=PLBrGAFAIyf5rby7QylRc6JxU5lzQ9c4tN&index=30)                  |  24.02.14  |
 |     | [[OS] Lec 9. Virtual Memory (5/5) - Hybrid Paging-Segmentation System](https://www.youtube.com/watch?v=ctfTntZ-RBo&list=PLBrGAFAIyf5rby7QylRc6JxU5lzQ9c4tN&index=31)                  |  24.02.14  |
-| 6주차| [[OS] Lec 10. Virtual Memory Management (1/6) - Cost model, HW components](https://www.youtube.com/watch?v=W8q3TKB9Lbo&list=PLBrGAFAIyf5rby7QylRc6JxU5lzQ9c4tN&index=32)                  |  24.02.12  |
-|     | [[OS] Lec 10. Virtual Memory Management (2/6) - SW components](https://www.youtube.com/watch?v=1gHHBa8UTjM&list=PLBrGAFAIyf5rby7QylRc6JxU5lzQ9c4tN&index=33)                  |  24.02.12  |
+|     | [[OS] Lec 10. Virtual Memory Management (1/6) - Cost model, HW components](https://www.youtube.com/watch?v=W8q3TKB9Lbo&list=PLBrGAFAIyf5rby7QylRc6JxU5lzQ9c4tN&index=32)                  |  24.02.17  |
+|     | [[OS] Lec 10. Virtual Memory Management (2/6) - SW components](https://www.youtube.com/watch?v=1gHHBa8UTjM&list=PLBrGAFAIyf5rby7QylRc6JxU5lzQ9c4tN&index=33)                  |  24.02.1  |
 
 ## 📌스프링 동작원리
 
