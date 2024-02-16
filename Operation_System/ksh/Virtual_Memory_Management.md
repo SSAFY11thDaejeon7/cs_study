@@ -23,7 +23,7 @@
 - Bit Vectors
   - page 사용 상황에 대한 정보를 기록하는 비트들(참조 비트, 갱신 비트)
 
-- Refernce bit vertor
+- Reference bit vector
   - 메모리에 적재된 각각의 page가 최근에 참조되었는지를 표시
   - Reference 비트를 확인함으로써 최근에 참조된 page들을 확인 가능
 - Update bit vector
@@ -66,7 +66,7 @@
     - 더 이상 변경될 가능성이 판단할 때, 미리 write-back
     - Page 교체시 발생하는 write-back 시간 절약
     - Write-back 이후, page 내용이 수정되면 overhead!
-- 실제 대부분의 시스템은 Demand cleaning 기벌 사용
+- 실제 대부분의 시스템은 Demand cleaning 기법 사용
   - 일반적으로 준수한 성능을 보여줌
 
 ### Load Control Strategies
