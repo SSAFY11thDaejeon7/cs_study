@@ -113,7 +113,7 @@
         - Page 교체 시 발생하는 write-back 시간 절약
         - Write-back 이후, page 내용이 수정되면 overhead 발생
     
-- 실제 대부분의 시스템은 Demand fetch 기법 사용
+- 실제 대부분의 시스템은 Demand cleaning 기법 사용
     - 일반적으로 준수한 성능을 보여 줌
     - Anticipatory cleaning
         - 잘못된 예측 시 자원 낭비가 큼
