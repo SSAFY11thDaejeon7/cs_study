@@ -67,7 +67,9 @@
 |     | [[OS] Lec 9. Virtual Memory (4/5) - Segmentation System](https://www.youtube.com/watch?v=Dprd7V842WY&list=PLBrGAFAIyf5rby7QylRc6JxU5lzQ9c4tN&index=30)                  |  24.02.14  |
 |     | [[OS] Lec 9. Virtual Memory (5/5) - Hybrid Paging-Segmentation System](https://www.youtube.com/watch?v=ctfTntZ-RBo&list=PLBrGAFAIyf5rby7QylRc6JxU5lzQ9c4tN&index=31)                  |  24.02.14  |
 |     | [[OS] Lec 10. Virtual Memory Management (1/6) - Cost model, HW components](https://www.youtube.com/watch?v=W8q3TKB9Lbo&list=PLBrGAFAIyf5rby7QylRc6JxU5lzQ9c4tN&index=32)                  |  24.02.17  |
-|     | [[OS] Lec 10. Virtual Memory Management (2/6) - SW components](https://www.youtube.com/watch?v=1gHHBa8UTjM&list=PLBrGAFAIyf5rby7QylRc6JxU5lzQ9c4tN&index=33)                  |  24.02.1  |
+|     | [[OS] Lec 10. Virtual Memory Management (2/6) - SW components](https://www.youtube.com/watch?v=1gHHBa8UTjM&list=PLBrGAFAIyf5rby7QylRc6JxU5lzQ9c4tN&index=33)                  |  24.02.17  |
+| 6주차| [[OS] Lec 10. Virtual Memory Management (3/6) - Replacement Strategies for Fixed Alloc. 1](https://www.youtube.com/watch?v=xLovOdiRtjI&list=PLBrGAFAIyf5rby7QylRc6JxU5lzQ9c4tN&index=34)                  |  24.02.19  |
+|     | [[OS] Lec 10. Virtual Memory Management (4/6) - Replacement Strategies for Fixed Alloc. 2](https://www.youtube.com/watch?v=ICq6zoZ0vUQ&list=PLBrGAFAIyf5rby7QylRc6JxU5lzQ9c4tN&index=35)                  |  24.02.19  |
 
 ## 📌스프링 동작원리
 
