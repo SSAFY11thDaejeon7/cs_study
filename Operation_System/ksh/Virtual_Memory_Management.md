@@ -78,3 +78,97 @@
   - 고부하 상태: 자원에 대한 경쟁 심화, 성능 저하
   - Thrashing 현상 발생: 과도한 page fault 발생
 
+### Replacement Strategies
+- Fixed allocation
+- Variable allocation
+
+### Fixed Allocation
+- Minimize page fault frequency (증명됨): Optimal solution이라고도 함
+- 기법: 앞으로 가장 오랫동안 참조되지 않을 page 교체
+  - Tie-breaking rule: page 번호가 가장 큰/작은 페이지 교체
+- 실현 불가능한 기법
+  - Page reference string을 미리 알고 있어야 함
+- 교체 기법의 성능 평가 도구로 사용됨
+
+- 예시
+  - 4page frames for the process, initially empty
+
+![15일차-1](https://github.com/SSAFY11thDaejeon7/cs_study/assets/80624927/43dcea18-017f-46bc-b718-7dfb15a394b9)
+
+- 5번 페이지를 읽으려고 할 때 6번 페이지를 가장 나중에 보므로 6번을 5번으로 교체함
+- 두번째로 6번 페이지를 읽으려고 할 때 1, 2번이 Tie-breaking이 걸리므로 임의로 규칙을 정해서 교체
+- 6번의 page fault가 발생함
+
+### Random Algorithm
+- 무작위로 교체할 page 선택
+- Low overhead
+- No policy
+
+### FIFO Algorithm
+- First In First Out
+  - 가장 오래된 page를 교체
+- Page가 적재된 시간을 기억하고 있어야 함
+- 자주 사용되는 page가 교체될 가능성이 높음
+- Locality에 대한 고려가 없음
+
+- 예시
+  - 4page frames for the process, initially empty
+
+![15일차-2](https://github.com/SSAFY11thDaejeon7/cs_study/assets/80624927/9b42d551-eee1-43c0-b9f2-262e0a1cb048)
+
+- 5번 페이지를 읽으려고 할 때 1번이 가장 먼저 들어왔으므로 1번을 5번으로 교체함
+- 다음으로 1번 페이지를 읽으려고 할 때 2번을 1번으로 교체함
+- 10번의 page fault가 발생함
+
+- FIFO Anomaly 예시
+
+![15일차-3](https://github.com/SSAFY11thDaejeon7/cs_study/assets/80624927/299cb15f-0f32-4282-bcbf-5b4db3b51020)
+
+- 자원은 늘어났는데 성능은 더 안 좋아짐
+
+### LRU (Least Recently Used) Algorithm
+- 가장 오랫동안 참조되지 않은 page를 교체
+- Page 참조시마다 시간을 기록해야 함
+- Locality에 기반을 둔 교체 기법
+- MIN algorithm에 근접한 성능을 보여줌
+- 실제로 가장 많이 활용되는 기법
+
+- 단점
+  - 참조시마다 시간을 기록해야 함 (Overhead)
+    - 간소화된 정보 수집으로 해소 가능
+  - Loop 실행에 필요한 크기보다 작은 수의 page frame이 할당된 경우, page fault 수가 급격히 증가함
+
+![15일차-4](https://github.com/SSAFY11thDaejeon7/cs_study/assets/80624927/a0a77acb-a053-426c-aa25-15310091eda4)
+
+- 7번의 page fault가 발생함
+
+### LFU (Least Frequently Used) Algorithm
+- 가장 참조 횟수가 적은 Page를 교체
+  - Tie-breaking rule: LRU
+- Page 참조시마다, 참조 횟수를 누적시켜야 함
+- Locality 활용
+  - LRU 대비 적은 overhead
+- 단점
+  - 최근 적재된 참조될 가능성이 높은 page가 교체될 가능성이 있음
+  - 참조 횟수 overhead가 있음
+
+![15일차-5](https://github.com/SSAFY11thDaejeon7/cs_study/assets/80624927/ab18d792-5d5e-42a8-b8b2-194e5d5da91a)
+
+- 7번의 page fault가 발생함
+
+### NUR (Not Used Recently) Algorithm
+- LRU approximation scheme
+  - LRU보다 적은 overhead로 비슷한 성능 달성 목적
+- Bit vector 사용
+
+### Clock Algorithm
+- Reference bit 사용함
+  - 주기적인 초기화 없음
+- Page frame들을 순차적으로 가리키는 pointer를 사용하여 교체될 page 결정
+- 먼저 적재된 page가 교체될 가능성이 높음: FIFO와 유사함
+- Reference bit를 사용하여 교체 페이지 결정
+  - LRU(or NUR)과 유사
+
+### Second Chance Algorithm
+- Clock algorithm과 유사함
+- Update bit도 함께 고려함
