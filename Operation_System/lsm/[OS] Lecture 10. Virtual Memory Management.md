@@ -1,4 +1,4 @@
-# 1. 가상 메모리 관리
+# 1. HW components
 
 ### 가상 메모리 (기억장치)
 
@@ -51,6 +51,8 @@
     - Update bit = 1
         - 해당 page의 (Main memory 상 내용 ≠ swap device의 내용)
         - 데이터가 바뀌었음을 표시한다.
+
+# 2. SW components
 
 ### Software Components
 
@@ -137,3 +139,117 @@
     - 고부하 상태
         - 자원에 대한 경쟁 심화, 성능 저하
         - Thrashing(스레싱) 현상 발생: 과도한 Page Fault가 발생하는 현상
+
+# 3. Replacement Strategies for Fixed Alloc.1
+
+### Locality
+
+- 프로세스가 프로그램/데이터의 특정 영역을 집중적으로 참조하는 현상
+- 원인
+    - Loop Structure in program
+    - Array, structure 등의 데이터 구조
+- 공간적 지역성 (Spatial locality): 참조한 영역과 인접한 영역을 참조하는 특성
+- 시간적 지역성 (Temporal locality): 한 번 참조한 영역을 곧 다시 참조하는 특성
+
+### Locality (Example)
+
+- 가정
+    - Paging system
+    - Page size = 1000words
+    - Machine instruction size = 1 word
+    - 주소 지정은 word 단위로 이루어짐
+    - 프로그램 4번 page에 continuous allocation 됨
+    - n = 1000
+- w = 494944
+- 11000번의 메모리 참조 중 5개의 page만을 집중적으로 접근하게 됨
+
+### Replacement Strategies
+
+- Fixed allocation
+    - MIN(OPT, B0) algorithm
+    - Random algorithm
+    - FIFO(First In First Out) algorithm
+    - LRU(Least Recently Used) algorithm
+    - LFU(Least Frequently Used) algorithm
+    - NUR(Not Used Recently) algorithm
+    - Clock algorithm
+    - Second change algorithm
+- Variable allocation
+- WS algorithm
+- PFF algorithm
+- VMIN algorithm
+
+### FIFO Algorithm
+
+- First In First Out: 가장 오래된 page를 교체
+- Page가 적재 된 시간을 기억하고 있어야 함
+- 자주 사용되는 page가 교체될 가능성이 높음
+    - Locality에 대한 고려가 없음
+- FIFO anomaly (Belady’s anomaly)
+    - FIFO 알고리즘의 경우, 더 많은 page frame을 할당 받음에도 불구하고 page fault의 수가 증가하는 경우가 있음
+
+### LRU Algorithm
+
+- 가장 오랫동안 참조되지 않은 page를 교체
+- Page 참조 시 마다 시간을 기록해야함
+- Locality에 기반을 둔 교체 기법
+- MIN Algorithm에 근접한 성능을 보여줌
+- 실제로 가장 많이 활용되는 기법
+- 단점
+    - 참조 시 마다 시간을 기록해야 함 (Overhead)
+    - 간소화된 정보 수집으로 해소 가능
+    - Loop 실행에 필요한 크기보다 작은 수의 page frame이 할당된 경우, page fault 수가 급격히 증가함
+    - loop를 위한 |Ref.stsring| = 4 / 할당된 page frame이 3개
+    - Allocation 기법에서 해결 해야 함
+
+### LFU Algorithm
+
+- 가장 참조 횟수가 적은 Page를 교체 : Tie-breaking rule: LRU
+- Page 참조 시 마다, 참조 횟수를 누적 시켜야 함
+- Locality 활용: LRU 대비 적은 overhead
+- 단점
+    - 최근 적재된 참조될 가능성이 높은 page가 교체 될 가능성이 있음
+    - 참조 횟수 누적 overhead
+
+### NUR Algorithm
+
+- LRU approximation scheme: LRU보다 적은 overhead로 비슷한 성능 달성 목적
+- Bit vector 사용: Reference bit vector, Update bit vector
+- 교체 순서
+    - (r, m) = (0, 0)
+    - (r, m) = (0, 1)
+    - (r, m) = (1, 0)
+    - (r, m) = (1, 1)
+
+### Clock Algorithm
+
+- IBM VM/370 OS
+- Reference bit 사용함: 주기적인 초기화 없음
+- Page frame들을 순차적으로 기리키는 pointer(시계 바늘)을 사용하여 교체될 page 결정
+- Pointer를 돌리면서 교체 Page 결정
+    - 현재 가리키고 있는 page의 reference bit(확인)
+    - r = 0인 경우, 교체 page로 결정
+    - r = 1인 경우, reference bit 초기화 후 pointer 이동
+- 먼저 적재된 Page가 교체될 가능성이 높음: FIFO와 유사
+- Reference bit를 사용하여 교체 페이지 결정
+    - LRU (or NUR)과 유사
+
+### Second Chance Algorithm
+
+- Clock Algorithm과 유사
+- Update bit(m)도 함께 고려함
+    - 현재 가리키고 있는 page의 (r, m) 확인
+    - (0, 0); 교체 page로 결정
+    - (0, 1); (0, 0) write-back(cleaning) list에 추가 후 이동
+    - (1, 0); (0, 0) 후 이동
+    - (1, 1);  (0, 1) 후 이동
+
+### Other Algorithms
+
+- Additional-reference-bits algorithm
+    - LRU approximation
+    - 여러 개의 reference bit를 가짐
+        - 각 time-interval에 대한 참조 여부 기록
+        - History register for each page
+- MRU (Most Recently Used) Algorithm: LRU 정반대 기법
+- MFU (Most Frequently Used) Algorithm: LFU 정반대 기법
