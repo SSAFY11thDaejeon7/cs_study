@@ -139,3 +139,125 @@
             - 과도한 page fault가 발생하는 현상
 
 ![image](https://github.com/SSAFY11thDaejeon7/cs_study/assets/81237987/39b12bb8-fd0b-4bc1-83bf-00c3101e0eb2)
+
+
+# Replacement Strategies - Fixed Allocation
+
+### Min Algorithm (OPT Algorithm)
+
+- 1966년 Belady에 의해 제시
+- Minimize page fault frequency (proved)
+    - Optimal solution
+- 기법
+    - 앞으로 가장 오랫동안 참조되지 않을 page 교체
+    - Tie-breaking rule : page 번호가 가장 큰 / 작은 페이지 교체
+- 실현 불가능한 기법(Unrealizable)
+    - Page reference string을 미리 알고 있어야 함
+    - 교체 기법의 성능 평가 도구로 사용됨
+- Example
+
+<img width="1084" alt="image" src="https://github.com/SSAFY11thDaejeon7/cs_study/assets/81237987/88bb53a2-0cab-462f-9e63-a9b5fc2d149a">
+
+### Random Algorithm
+
+- 무작위로 교체할 page 선택
+- Low overhead
+- No policy
+
+### FIFO Algorithm
+
+- First In First Out
+    - 가장 오래된 page를 교체
+- Page가 적재 된 시간을 기억하고 있어야 함
+- 자주 사용되는 page가 교체 될 가능성이 높음
+    - Locality에 대한 고려가 없음
+- FIFO anomaly (Belady’s anomaly)
+    - FIFO 알고리즘의 경우, 더 많은 page frame을 할당 받음에도 불구하고 page fault의 수가 증가하는 경우가 있음 → Locality에 대해 고려하지 않았기 때문
+- Example
+
+<img width="967" alt="image" src="https://github.com/SSAFY11thDaejeon7/cs_study/assets/81237987/53f3eccd-3673-43a2-805e-14ee9e8c0458">
+
+### LRU (Least Recently Used) Algorithm
+
+- 가장 오랫동안 참조되지 않은 page를 교체
+- page 참조 시마다 시간을 기록해야 함
+- Locality에 기반을 둔 교체 기법
+- MIN Algorithm에 근접한 성능을 보여줌
+- 실제로 가장 많이 활용되는 기법
+- 단점
+    - 참조 시마다 시간을 기록해야 하므로 Overhead가 발생
+        - 간소화된 정보 수집으로 해소 가능 (정확한 시간 대신에 순서만 기록)
+    - Loop 실행에 필요한 크기보다 작은 수의 page frame이 할당 된 경우, page fault수가 급격히 증가함
+        - Allocation기법에서 해결 해야 함
+- Example
+
+<img width="992" alt="image" src="https://github.com/SSAFY11thDaejeon7/cs_study/assets/81237987/515b1c3a-8f16-445e-8171-10e9ef8d75a7">
+
+### LFU (Least Frequently Used) Algorithm
+
+- 가장 참조 횟수가 적은 page를 교체
+    - Tie-breaking rule: LRU
+- Page 참조 시마다, 참조 횟수를 누적 시켜야 함
+- Locality 활용
+    - LRU 대비 적은 overhead
+- 단점
+    - 최근 적재된 참조될 가능성이 높은 page가 교체 될 가능성이 있음
+    - 참조 횟수 누적 overhead 발생
+- Example
+
+<img width="918" alt="image" src="https://github.com/SSAFY11thDaejeon7/cs_study/assets/81237987/03a810f6-d38a-4523-8099-a2a074697859">
+
+### NUR (Not Used Recently) Algorithm
+
+- LRU approximation scheme
+    - LRU보다 적은 overhead로 비슷한 성능 달성 목적
+- Bit Vector 사용
+    - Reference Bit Vector(r), Update Bit Vector(m)
+- 교체 순서
+    1. (r, m) = (0, 0) (일정 시간 참조되지 않고, 수정되지 않음)
+    2. (r, m) = (0, 1) (일정 시간 참조되지 않고, 수정 되었음)
+    3. (r, m) = (1, 0) (일정 시간 참조되고 수정되지 않음)
+    4. (r, m) = (1, 1) (일정 시간 참조되고 수정 되었음)
+
+### Clock Alogrithm
+
+- IBM VM/370 OS
+- Reference Bit 사용함
+    - 주기적인 초기화 없음
+- Page frame들을 순차적으로 가리키는 pointer(시계바늘)를 사용하여 교체될 page를 결정
+- Pointer를 돌리면서 교체 Page 결정
+    - 현재 가리키고 있는 Page의 Reference Bit(r) 확인
+    - r = 0 인 경우, 교체 Page로 결정
+    - r = 1 인 경우, Reference Bit 초기화 후 Pointer 이동
+- 먼저 적재된 Page가 교체될 가능성이 높음
+    - FIFO와 유사
+- Reference Bit를 사용하여 교체 페이지 결정
+    - LRU(or NUR)과 유사
+- Example
+
+<img width="1229" alt="image" src="https://github.com/SSAFY11thDaejeon7/cs_study/assets/81237987/028a8e1f-9b04-4eb4-82fa-f4188ab372c7">
+
+### Second Chance Algorithm
+
+- Clock Algorithm과 유사
+- Update Bit(m)도 함께 고려 함
+    - 현재 가리키고 있는 page의 (r, m) 확인
+    - (0, 0) → 교체 Page로 결정
+    - (0, 1) → (0, 0), write-back(cleaning) list에 추가 후 이동
+    - (1, 0) → (0, 0) 후 이동
+    - (1, 1) → (0, 1) 후 이동
+- Example
+
+<img width="1211" alt="image" src="https://github.com/SSAFY11thDaejeon7/cs_study/assets/81237987/e7aa641e-2dd1-4fd8-9b2a-fa804d01ab5d">
+
+### Other Algorithms
+
+- Additional-reference-bits algorithm
+    - LRU approximation
+    - 여러 개의 reference bit를 가짐
+        - 각 time-interval에 대한 참조 여부 기록
+        - History register for each page
+- MRU (Most Recently Used) Algorithm
+    - LRU와 정반대 기법
+- MFU (Most Frequently Used) Algorithm
+    - LFU와 정반대 기법
