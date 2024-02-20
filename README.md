@@ -70,6 +70,11 @@
 |     | [[OS] Lec 10. Virtual Memory Management (2/6) - SW components](https://www.youtube.com/watch?v=1gHHBa8UTjM&list=PLBrGAFAIyf5rby7QylRc6JxU5lzQ9c4tN&index=33)                  |  24.02.17  |
 | 6주차| [[OS] Lec 10. Virtual Memory Management (3/6) - Replacement Strategies for Fixed Alloc. 1](https://www.youtube.com/watch?v=xLovOdiRtjI&list=PLBrGAFAIyf5rby7QylRc6JxU5lzQ9c4tN&index=34)                  |  24.02.19  |
 |     | [[OS] Lec 10. Virtual Memory Management (4/6) - Replacement Strategies for Fixed Alloc. 2](https://www.youtube.com/watch?v=ICq6zoZ0vUQ&list=PLBrGAFAIyf5rby7QylRc6JxU5lzQ9c4tN&index=35)                  |  24.02.19  |
+|     | [[OS] Lec 10. Virtual Memory Management (5/6) - Replacement Strategies for Variable Alloc.](https://www.youtube.com/watch?v=ByQmerWj1bg&list=PLBrGAFAIyf5rby7QylRc6JxU5lzQ9c4tN&index=36)                  |  24.02.21  |
+|     | [[OS] Lec 10. Virtual Memory Management (6/6) - Other considerations](https://www.youtube.com/watch?v=_QpNwu_MYck&list=PLBrGAFAIyf5rby7QylRc6JxU5lzQ9c4tN&index=37)                  |  24.02.21  |
+|     | [[OS] Lec 11-1. Disk System](https://www.youtube.com/watch?v=ipJ7DPzYBk0&list=PLBrGAFAIyf5rby7QylRc6JxU5lzQ9c4tN&index=38)                  |  24.02.25  |
+|     | [[OS] Lec 11-2. File System Overview](https://www.youtube.com/watch?v=bRwjKvmeyZQ&list=PLBrGAFAIyf5rby7QylRc6JxU5lzQ9c4tN&index=39)                  |  24.02.25  |
+|     | [[OS] Lec 11-3. Directory Structure](https://www.youtube.com/watch?v=3VOqyi-wbJU&list=PLBrGAFAIyf5rby7QylRc6JxU5lzQ9c4tN&index=40)                  |  24.02.25  |
 
 ## 📌스프링 동작원리
 
