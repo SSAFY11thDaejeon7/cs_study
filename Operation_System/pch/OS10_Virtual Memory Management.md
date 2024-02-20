@@ -96,3 +96,30 @@
   - 고부하 상태 (Over-loaded) : 자원에 대한 경쟁 심화, 성능 저하
     - Thrashing(스레싱) 현상 발생 : 과도한 page fault가 발생하여 성능이 저하되는 현상
   ![image](https://github.com/SSAFY11thDaejeon7/cs_study/assets/91451735/bd5d90af-2089-4ed7-bc27-ada9df27eb15)
+
+## 교체 기법의 종류
+- Locality
+  - 프로세스가 프로그램/데이터의 특정 영역을 집중적으로 참조하는 현상
+  - 원인
+    - 프로그램의 반복 구조, 매열 및 구조체 등의 데이터 구조 때문에 주로 발생
+  - 공간적 지역성(Spatial locality) : 참조한 영역과 인접한 영역을 참조하는 특성
+  - 시간적 지역성(Temporal locality) : 한 번 참조한 영역을 곧 다시 참조하는 특성
+
+1. Min Algorithm (OPT algorithm)
+   - 앞으로 가장 오랫동안 참조하지 않을 page를 교체하는 기법
+   - page fault가 가장 적게 발생하는 교체 기법
+   - 실현 불가능한 기법 : Page reference string을 미리 알고 있어야 하기 때문이다.
+
+2. FIFO Algorithm
+   - 가장 오래된 페이지를 교체하는 기법
+   - page가 메모리에 적재된 시간을 기억하고 있어야 한다.
+   - Locality에 대한 고려가 없이 설계되어 자주 사용되는 page가 교체될 가능성이 높다.
+   - FIFO anomaly : 자주 사용되는 page가 교체될 가능성이 높기 때문에, 더 많은 page frame을 할당 받아도,
+                    더 많은 page fault가 발생하는 현상
+
+3. LRU (Least Recently Used) Alogorithm
+   - 가장 오랫동안 참조되지 않은 page를 교체
+   - page 참조 시 마다 시간을 기록해야 함, overehad 발생
+   - Locality에 기반을 둔 교체 기법으로 Min algorithm에 근접한 성능을 보여줌
+   - 실제로 가장 많이 사용되는 교체기법
+   - 단점 : 참조 시마다 시간을 기록하기 때문에 overhead가 발생하고 Loop 실행에 필요한 크기보다 작은 수의 page frame이 할당된 경우, page faul 수가 급격히 증가한다.
