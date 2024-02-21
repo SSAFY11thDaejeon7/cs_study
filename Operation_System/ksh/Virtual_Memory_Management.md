@@ -172,3 +172,82 @@
 ### Second Chance Algorithm
 - Clock algorithm과 유사함
 - Update bit도 함께 고려함
+
+### Working Set algorithm
+- Working set
+  - 프로세스가 특정 시점에 자주 참조하는 page들의 집합
+  - 최근 일정시간동안 참조된 page들의 집합
+  - 시간에 따라 변함
+- Working set memory management
+  - Locality에 기반을 둠
+  - Working set을 메모리에 항상 유지
+    - Page fault rate 감소
+    - 시스템 성능 향상
+  - Window size는 고정
+    - Memory allocation은 가변
+    - Window size 값이 성능을 결정짓는 중요한 요소
+- Window size가 늘어날 때 초반에는 Working set size가 급격하게 늘어나지만, 이후에 locality때문에 WS size가 늘어나는 것이 완화됨
+- 성능 평가
+  - Page fault 수 외에 다른 지표도 함께 봐야함
+  - 평균 page frame수 = 3.2
+- 특성
+  - 적재되는 page가 없더라도, 메모리를 반납하는 page가 있을 수 있음
+  - 새로 적재되는 page가 있더라도, 교체되는 page가 없을 수 있음
+- 단점
+  - Working set 관리 overhead
+  - 상주 집합을 page fault가 없더라도 주기적으로 관리해야함
+
+### Page Fault Frequency algorithm
+- Residence set size를 page fault rate에 따라 결정
+- Resident set 갱신 및 메모리 할당: overhead가 적음
+- Algorithm
+  - 1. Page fault 발생시, IFT 계산
+  - 2. Low page fault rate일 경우, page fault가 일어난 시간부터 현재시간동안 참조된 page들만 유지하고 나머지 page들은 메모리에서 내림
+  - 3. High page fault rate일 경우, 기존 pages들 유지하고 현재 참조된 page를 추가 적재함
+- 성능 평가
+  - Page fault 수 외에 다른 지표도 함께 봐야 함
+  - 평균 page frame수 = 3.7
+- 특징
+  - 메모리 상태 변화가 page fault 발생시에만 일어남 -> low overhead
+
+### Variable MIN algorithm
+- 평균 메모리 할당량과 page fault 발생 횟수 모두 고려했을 때의 Optimal
+- 실현 불가능한 기법
+  - Page reference string을 미리 알고있어야함
+- Algorithm
+  - Page r이 t시간에 참조되면, page r이 t~t+window size 사이에 다시 참조되는지 확인
+  - 참조된다면 page r을 유지하고 안된다면 page r을 메모리에서 내림
+- 성능 평가
+  - Page fault수 외에 다른 지표도 함꼐 봐야 함
+  - 평균 할당 page frame수 = 1.6
+
+### Page Size
+- 시스템 특성에 따라 다름
+  - No best answer! 적당한 것이 좋음
+  - 점점 커지는 경향이 있음
+- 일반적인 page size
+  - 128 bytes ~ 4M bytes
+- Small page size
+  - high overhead
+  - 내부 단편화 감소
+  - I/O 시간 증가
+  - Locality 향상
+  - Page fault 증가
+- Large page size
+  - low overhead
+  - 내부 단편화 증가
+  - I/O 시간 감소
+  - Locality 저하
+  - Page fault 감소
+- CPU와 Memory size가 발전하고 있으므로 상대적인 Page fault 처리 비용이 올라감
+
+### Program Restructuring
+- 가상 메모리 시스템의 특성에 맞도록 프로그램을 재구성
+- 사용자가 가상 메모리 관리 기법에 대해 이해하고있다면, 프로그램의 구조를 변경하여 성능을 높일 수 있음
+
+### TLB Reach
+- TLB를 통해 접근할 수 있는 메모리의 양 (entry 수 * page size)
+- TLB의 hit ratio를 높이려면,
+  - TLB의 크기 증가: 비쌈
+  - Page 크기 증가 or 다양한 page size 지원
+    - OS의 지원이 필요함
