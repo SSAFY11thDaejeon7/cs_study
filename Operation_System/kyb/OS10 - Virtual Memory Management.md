@@ -150,6 +150,17 @@
     - PFF(Page Fault Frequency) algorithm
     - VMIN(Variable MIN) algorithm
 
+# 고정 할당 기법
+
+- MIN(OPT, B0) algorithm
+- Random algorithm
+- FIFO algorithm
+- LRU(Least Recently Used) algorithm
+- LFU(Least Frequently Used) algorithm
+- NUR(Not Used Recently) algorithm
+- Clock algorithm
+- Second chance algorithm
+  
 ## Min Algorithm(OPT algorithm)
 
 - Minimize page fault frequency(proved)
@@ -287,3 +298,125 @@
     - LRU와 정반대 기법
 - MFU(Most Frequently Used) algorithm
     - LFU와 정반대 기법
+
+# 가변 할당 기법
+
+- WS(Working Set) algorithm
+- PFF(Page Fault Frequency) algorithm
+- VMIN(Variable MIN) algorithm
+
+## Working Set(WS) Algorithm
+
+- Working Set
+    - Process가 특정 시점에 자주 참조하는 page들의 집합
+    - 최근 일정 시간(Δ) 동안 참조된 page들의 집합
+    - 시간에 따라 변함
+    - W(t, Δ)
+    
+    ![image](https://github.com/SSAFY11thDaejeon7/cs_study/assets/90568693/44eb8105-b51c-4caf-9fce-d388f2a37787)
+
+    
+- Working Set memory management
+    - Locality에 기반을 둠
+    - Working set을 메모리에 항상 유지
+        - page fault rate(thrashing) 감소
+        - 시스템 성능 향상
+    - Window size(Δ)는 고정
+        - Memory allocation은 가변
+        - Δ 값이 성능을 결정 짓는 중요한 요소
+- 성능 평가
+    - Page fault 수 외 다른 지표도 함께 봐야 함
+        - page fault
+        - page fault 처리 비용
+        - 평균 할당 page frame 수
+        - page 유지 비용
+        - etc..
+- 특성
+    - 적재 되는 page가 없더라도, 메모리를 반납하는 page가 있을 수 있음
+    - 새로 적재되는 page가 있더라도, 교체 되는 page가 없을 수 있음
+- 단점
+    - Working set management overhead
+    - Residence set(상주 집합)을 page fault가 없더라도, 지속적으로 관리해야 함
+    
+
+## Page Fault Frequency(PFF) Algorithm
+
+- Residence set size를 page fault rate에 따라 결정
+    - Low page fault rate(long inter-fault time)
+        - Process에게 할당된 PF 수를 감소
+    - High page fault rate(short inter-fault time)
+        - Process에게 할당된 PF 수를 증가
+- Resident set 갱신 및 메모리 할당
+    - Page fault가 발생 시에만 수행
+    - Low overhead
+    
+- Algorithm
+    1. Page fault 발생 시, IFT 계산
+    2. IFT > t(Low page fault rate)
+        1. Residence set (page fault 발생 시간 ~ 현재 시간) 동안 참조 된 page들만 유지
+        2. 나머지 page들은 메모리에서 내림
+        3. 메모리 할당 유지 or 감소
+        
+    3. IFT < t(High page fault rate)
+        1. 기존 pages들 유지
+        2. 현재 참조된 page를 추가 적재
+        3. 메모리 할당 증가
+- 성능 평가
+    - Page fault 외 다른 지표도 함께 봐야 함
+- 특징
+    - 메모리 상태 변화가 page fault 발생 시에만 변함
+        - Low overhead
+        
+
+## Variable MIN(VMIN) Algorithm
+
+- Variable allocation 기반 교체 기법 중, optimal algorithm
+    - 평균 메모리 할당량과 page fault 발생 횟수 모두 고려했을 때의 Optimal
+- 실현 불가능한 기법
+    - Page reference string을 미리 알고 있어야 함
+- 기법
+    - [t, t + Δ] 을 고려해서 교체할 page 선택
+- Algorithm
+    - Page r이 t 시간에 참조 되면,
+    r이 t ~ t + Δ 사이에 다시 참조되는지 확인
+        - 참조된다면 page r을 유지
+        - 참조되지 않는다면, page r을 메모리에서 내림
+- 성능 평가
+    - Page fault 수 외 다른 지표도 함께 봐야 함
+- 최적 성능을 위한 Δ 값
+    - Δ = U / R
+    - U: 한번의 참조 시간 동안 page를 메모리에 유지하는 비용
+    - R: page fault 발생 시 처리 비용
+    
+
+# 기타 고려 사항
+
+- Page size
+- Program restructuring
+- TLB reach
+
+## Page size
+
+- 시스템 특성에 따라 다름
+    - No best answer!
+    - 점점 커지는 경향
+- 일반적인 page size
+    - 128 bytes ~ 4M bytes
+
+![image](https://github.com/SSAFY11thDaejeon7/cs_study/assets/90568693/82a54789-d863-4723-a556-ff377b6b5191)
+
+
+## Program Restructuring
+
+- 가상 메모리 시스템의 특성에 맞도록 프로그램을 재구성
+- 사용자가 가상 메모리 관리 기법에 대해 이해하고 있다면,
+프로그램의 구조를 변경하여 성능을 높일 수 있음
+
+## TLB Reach
+
+- TLB를 통해 접근할 수 있는 메모리의 양
+    - (entry의 수) * (page 크기)
+- TLB의 hit ratio를 높이려면,
+    - TLB의 크기 증가(비쌈)
+    - Page 크기 증가 or 다양한 page size 지원
+        - OS의 지원 필요
