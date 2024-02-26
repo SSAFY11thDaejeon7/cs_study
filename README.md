@@ -75,6 +75,8 @@
 |     | [[OS] Lec 11-1. Disk System](https://www.youtube.com/watch?v=ipJ7DPzYBk0&list=PLBrGAFAIyf5rby7QylRc6JxU5lzQ9c4tN&index=38)                  |  24.02.25  |
 |     | [[OS] Lec 11-2. File System Overview](https://www.youtube.com/watch?v=bRwjKvmeyZQ&list=PLBrGAFAIyf5rby7QylRc6JxU5lzQ9c4tN&index=39)                  |  24.02.25  |
 |     | [[OS] Lec 11-3. Directory Structure](https://www.youtube.com/watch?v=3VOqyi-wbJU&list=PLBrGAFAIyf5rby7QylRc6JxU5lzQ9c4tN&index=40)                  |  24.02.25  |
+| 7주차| [[OS] Lec 11-4. File Protection](https://www.youtube.com/watch?v=zrzbETkxljM&list=PLBrGAFAIyf5rby7QylRc6JxU5lzQ9c4tN&index=41)                  |  24.02.26  |
+|     | [[OS] Lec 11-5. File System Implementation](https://www.youtube.com/watch?v=HGT8HbbB_3w&list=PLBrGAFAIyf5rby7QylRc6JxU5lzQ9c4tN&index=42)                  |  24.02.26  |
 
 ## 📌스프링 동작원리
 
