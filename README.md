@@ -21,7 +21,7 @@
 </table>
 
 ## 📝 스터디 방식
-- 주 3회 (월,수,목) 정해진 강의를 수강하고 공부한 내용을 정리하여 main branch에 commit합니다.
+- 주 3회 (월,수,토) 정해진 강의를 수강하고 공부한 내용을 정리하여 main branch에 commit합니다.
 - 한 과목이 끝나면 모의 면접을 진행합니다.
 
 - ## 🔗 참고자료 Links
@@ -77,6 +77,9 @@
 |     | [[OS] Lec 11-3. Directory Structure](https://www.youtube.com/watch?v=3VOqyi-wbJU&list=PLBrGAFAIyf5rby7QylRc6JxU5lzQ9c4tN&index=40)                  |  24.02.25  |
 | 7주차| [[OS] Lec 11-4. File Protection](https://www.youtube.com/watch?v=zrzbETkxljM&list=PLBrGAFAIyf5rby7QylRc6JxU5lzQ9c4tN&index=41)                  |  24.02.26  |
 |     | [[OS] Lec 11-5. File System Implementation](https://www.youtube.com/watch?v=HGT8HbbB_3w&list=PLBrGAFAIyf5rby7QylRc6JxU5lzQ9c4tN&index=42)                  |  24.02.26  |
+|     | [[OS] Lec 12-1. I/O System ](https://www.youtube.com/watch?v=CtOggyroUeA&list=PLBrGAFAIyf5rby7QylRc6JxU5lzQ9c4tN&index=43)                  |  24.03.03  |
+|     | [[OS] Lec 12-2. Disk Scheduling](https://www.youtube.com/watch?v=xlKz4HteK0U&list=PLBrGAFAIyf5rby7QylRc6JxU5lzQ9c4tN&index=44)                  |  24.03.03  |
+|     | [[OS] Lec 12-3. RAID Architecture](https://www.youtube.com/watch?v=omDkxSyol98&list=PLBrGAFAIyf5rby7QylRc6JxU5lzQ9c4tN&index=45)                  |  24.03.03  |
 
 ## 📌스프링 동작원리
 
